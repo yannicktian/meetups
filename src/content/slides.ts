@@ -15,7 +15,8 @@ export const slides: Slide[] = [
         location: "Marseille",
       },
       hosts: "Qalico × Gojob",
-      acknowledgment: "First of a long series — thank you to both teams for hosting",
+      acknowledgment:
+        "First of a long series — thank you to both teams for hosting",
     },
   },
   {
@@ -29,14 +30,20 @@ export const slides: Slide[] = [
       company: "Gojob",
       avatar: "/avatar_YT_small.jpg",
       bullets: [
-        { text: "Driving agent building and observability for two years", icon: "Cpu" },
-        { text: "Shipped Alpha — 3M conversations in production", icon: "MessageSquare" },
-        { text: "Now building the In-App Agent for our SaaS customers", icon: "Sparkles" },
+        {
+          text: "Driving agent building and observability for two years",
+          icon: "Cpu",
+        },
+        {
+          text: "Shipped Alpha — 3M conversations in production",
+          icon: "MessageSquare",
+        },
+        {
+          text: "Now building the In-App Agent for our SaaS customers",
+          icon: "Sparkles",
+        },
       ],
-      links: [
-        { label: "@yannicktian" },
-        { label: "gojob.com" },
-      ],
+      links: [{ label: "yannick.tian@gojob.com" }],
     },
   },
   {
@@ -49,7 +56,10 @@ export const slides: Slide[] = [
       size: "large",
       bullets: [
         { text: "You're not just using an AI assistant", icon: "Sparkles" },
-        { text: "You're using a harness — agent loop + tools + skills + memory + UI", icon: "Workflow" },
+        {
+          text: "You're using a harness — agent loop + tools + skills + memory + UI",
+          icon: "Workflow",
+        },
         {
           text: "Today: how this same pattern is going to reshape every product you build",
           icon: "Zap",
@@ -66,8 +76,14 @@ export const slides: Slide[] = [
     props: {
       subtitle: "Three years, three paradigms",
       bullets: [
-        { text: "2023 — Prompt engineering: craft the perfect instructions", icon: "MessageSquare" },
-        { text: "2024-25 — Context engineering: give the model the right context", icon: "Database" },
+        {
+          text: "2023 — Prompt engineering: craft the perfect instructions",
+          icon: "MessageSquare",
+        },
+        {
+          text: "2024-25 — Context engineering: give the model the right context",
+          icon: "Database",
+        },
         {
           text: "2026 — Harness engineering: build systems where the model makes intelligent choices",
           icon: "Cpu",
@@ -109,9 +125,18 @@ export const slides: Slide[] = [
     props: {
       subtitle: "AI-powered temp work marketplace",
       bullets: [
-        { text: "Thousands of job postings, millions of candidates", icon: "Users" },
-        { text: "Recruiters drowning in screening calls before the best candidates apply", icon: "AlertTriangle" },
-        { text: "We started shipping AI to fix this in 2023", icon: "Sparkles" },
+        {
+          text: "Thousands of job postings, millions of candidates",
+          icon: "Users",
+        },
+        {
+          text: "Recruiters drowning in screening calls before the best candidates apply",
+          icon: "AlertTriangle",
+        },
+        {
+          text: "We started shipping AI to fix this in 2023",
+          icon: "Sparkles",
+        },
       ],
     },
   },
@@ -123,9 +148,18 @@ export const slides: Slide[] = [
     props: {
       subtitle: "Our recruiter assistant — prequalifies candidates via SMS",
       bullets: [
-        { text: "Validates job posting prerequisites in a natural conversation", icon: "MessageSquare" },
-        { text: "Recruiters only see candidates who pass the must-haves", icon: "CheckCircle2" },
-        { text: "Started internal. Worked too well to keep to ourselves.", icon: "TrendingUp" },
+        {
+          text: "Validates job posting prerequisites in a natural conversation",
+          icon: "MessageSquare",
+        },
+        {
+          text: "Recruiters only see candidates who pass the must-haves",
+          icon: "CheckCircle2",
+        },
+        {
+          text: "Started internal. Worked too well to keep to ourselves.",
+          icon: "TrendingUp",
+        },
       ],
     },
   },
@@ -139,15 +173,43 @@ export const slides: Slide[] = [
       interactiveComponent: "SmsConversation",
       interactiveProps: {
         messages: [
-          { sender: "agent", text: "Hello! I'm Alpha from Gojob. I have a warehouse operator position available. Are you interested?", delay: 1200 },
+          {
+            sender: "agent",
+            text: "Hello! I'm Alpha from Gojob. I have a warehouse operator position available. Are you interested?",
+            delay: 1200,
+          },
           { sender: "candidate", text: "Yes, I'm interested!", delay: 800 },
-          { sender: "agent", text: "Great! Do you have a valid forklift license (CACES 1/3/5)?", delay: 1000 },
-          { sender: "candidate", text: "Yes, I have CACES 1 and 3", delay: 800 },
-          { sender: "agent", text: "Perfect. The position requires working in cold storage (-20°C). Is that okay for you?", delay: 1200 },
-          { sender: "candidate", text: "No problem, I've done that before", delay: 600 },
-          { sender: "agent", text: "Last question: can you start next Monday for a 3-month assignment?", delay: 1000 },
+          {
+            sender: "agent",
+            text: "Great! Do you have a valid forklift license (CACES 1/3/5)?",
+            delay: 1000,
+          },
+          {
+            sender: "candidate",
+            text: "Yes, I have CACES 1 and 3",
+            delay: 800,
+          },
+          {
+            sender: "agent",
+            text: "Perfect. The position requires working in cold storage (-20°C). Is that okay for you?",
+            delay: 1200,
+          },
+          {
+            sender: "candidate",
+            text: "No problem, I've done that before",
+            delay: 600,
+          },
+          {
+            sender: "agent",
+            text: "Last question: can you start next Monday for a 3-month assignment?",
+            delay: 1000,
+          },
           { sender: "candidate", text: "Yes, I'm available", delay: 500 },
-          { sender: "agent", text: "Excellent! You meet all the prerequisites. A recruiter will contact you shortly. Thank you!", delay: 1500 },
+          {
+            sender: "agent",
+            text: "Excellent! You meet all the prerequisites. A recruiter will contact you shortly. Thank you!",
+            delay: 1500,
+          },
         ],
       },
     },
@@ -172,7 +234,8 @@ export const slides: Slide[] = [
     component: "CalloutSlide",
     props: {
       title: "The 80/20 lesson",
-      callout: "Building the AI was the easy 80%. Operating it was the other 80%.",
+      callout:
+        "Building the AI was the easy 80%. Operating it was the other 80%.",
       attribution: "Trust takes infrastructure, not just a good prompt",
       icon: "Lightbulb",
       kind: "warning",
@@ -194,11 +257,21 @@ export const slides: Slide[] = [
     section: "saas",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Customers like France Travail and Persol wanted Alpha for themselves",
+      subtitle:
+        "Customers like France Travail and Persol wanted Alpha for themselves",
       bullets: [
-        { text: "Same AI, customized per customer's recruiting needs", icon: "Building2" },
-        { text: "Onboarding was painful — weeks of round-trips with management", icon: "AlertTriangle" },
-        { text: "Customers couldn't self-serve. We were the bottleneck.", icon: "Zap" },
+        {
+          text: "Same AI, customized per customer's recruiting needs",
+          icon: "Building2",
+        },
+        {
+          text: "Onboarding was painful — weeks of round-trips with management",
+          icon: "AlertTriangle",
+        },
+        {
+          text: "Customers couldn't self-serve. We were the bottleneck.",
+          icon: "Zap",
+        },
       ],
     },
   },
@@ -220,10 +293,22 @@ export const slides: Slide[] = [
     props: {
       subtitle: "What if the recruiter could just ask?",
       bullets: [
-        { text: "Built on Mastra — agent + tools + RAG + MCP server", icon: "Cpu" },
-        { text: "Suggests prerequisites by retrieving similar job postings via vector search", icon: "Database" },
-        { text: "Streams structured output to the UI — suggestions appear live", icon: "Activity" },
-        { text: "From weeks of round-trips → minutes of self-serve", icon: "Zap" },
+        {
+          text: "Built on Mastra — agent + tools + RAG + MCP server",
+          icon: "Cpu",
+        },
+        {
+          text: "Suggests prerequisites by retrieving similar job postings via vector search",
+          icon: "Database",
+        },
+        {
+          text: "Streams structured output to the UI — suggestions appear live",
+          icon: "Activity",
+        },
+        {
+          text: "From weeks of round-trips → minutes of self-serve",
+          icon: "Zap",
+        },
       ],
     },
   },
@@ -239,12 +324,37 @@ export const slides: Slide[] = [
         jobTitle: "Warehouse Operator",
         jobCompany: "Logistics Corp",
         prerequisites: [
-          { label: "CACES License", type: "eliminatory", description: "Valid CACES 1, 3, or 5 forklift certification required" },
-          { label: "Cold Storage Experience", type: "preferred", description: "Previous experience in -20°C environments" },
-          { label: "Availability", type: "eliminatory", description: "Must be available for immediate start" },
-          { label: "Transportation", type: "eliminatory", description: "Own vehicle (site not on public transit)" },
-          { label: "Physical Fitness", type: "preferred", description: "Able to lift up to 25kg regularly" },
-          { label: "French Language", type: "eliminatory", description: "Conversational French for safety briefings" },
+          {
+            label: "CACES License",
+            type: "eliminatory",
+            description:
+              "Valid CACES 1, 3, or 5 forklift certification required",
+          },
+          {
+            label: "Cold Storage Experience",
+            type: "preferred",
+            description: "Previous experience in -20°C environments",
+          },
+          {
+            label: "Availability",
+            type: "eliminatory",
+            description: "Must be available for immediate start",
+          },
+          {
+            label: "Transportation",
+            type: "eliminatory",
+            description: "Own vehicle (site not on public transit)",
+          },
+          {
+            label: "Physical Fitness",
+            type: "preferred",
+            description: "Able to lift up to 25kg regularly",
+          },
+          {
+            label: "French Language",
+            type: "eliminatory",
+            description: "Conversational French for safety briefings",
+          },
         ],
       },
     },
@@ -257,15 +367,68 @@ export const slides: Slide[] = [
     props: {
       subtitle: "Mastra Agent + RAG + MCP + Streaming UI",
       nodes: [
-        { id: "frontend", label: "React Frontend", x: 30, y: 60, width: 150, height: 45, color: "#ec4899" },
-        { id: "stream", label: "Stream API", x: 220, y: 60, width: 130, height: 45, color: "#ec4899" },
-        { id: "agent", label: "Mastra Agent", x: 390, y: 60, width: 140, height: 45, color: "#8b5cf6" },
-        { id: "rag", label: "RAG (pgvector)", x: 220, y: 180, width: 150, height: 45, color: "#6366f1" },
-        { id: "mcp", label: "MCP Server", x: 410, y: 180, width: 130, height: 45, color: "#6366f1" },
-        { id: "domain", label: "Domain DB", x: 410, y: 300, width: 130, height: 45, color: "#71717a" },
+        {
+          id: "frontend",
+          label: "React Frontend",
+          x: 30,
+          y: 60,
+          width: 150,
+          height: 45,
+          color: "#ec4899",
+        },
+        {
+          id: "stream",
+          label: "Stream API",
+          x: 220,
+          y: 60,
+          width: 130,
+          height: 45,
+          color: "#ec4899",
+        },
+        {
+          id: "agent",
+          label: "Mastra Agent",
+          x: 390,
+          y: 60,
+          width: 140,
+          height: 45,
+          color: "#8b5cf6",
+        },
+        {
+          id: "rag",
+          label: "RAG (pgvector)",
+          x: 220,
+          y: 180,
+          width: 150,
+          height: 45,
+          color: "#6366f1",
+        },
+        {
+          id: "mcp",
+          label: "MCP Server",
+          x: 410,
+          y: 180,
+          width: 130,
+          height: 45,
+          color: "#6366f1",
+        },
+        {
+          id: "domain",
+          label: "Domain DB",
+          x: 410,
+          y: 300,
+          width: 130,
+          height: 45,
+          color: "#71717a",
+        },
       ],
       edges: [
-        { from: "frontend", to: "stream", label: "partial JSON", animated: true },
+        {
+          from: "frontend",
+          to: "stream",
+          label: "partial JSON",
+          animated: true,
+        },
         { from: "stream", to: "agent" },
         { from: "agent", to: "rag", label: "similar postings" },
         { from: "agent", to: "mcp", label: "tools" },
@@ -285,7 +448,10 @@ export const slides: Slide[] = [
       bullets: [
         { text: "agent.stream() returns text-delta chunks", icon: "Activity" },
         { text: "partial-json parses incomplete JSON live", icon: "Zap" },
-        { text: "React state updates → UI re-renders → users see suggestions appear", icon: "Sparkles" },
+        {
+          text: "React state updates → UI re-renders → users see suggestions appear",
+          icon: "Sparkles",
+        },
       ],
       code: `const stream = await agent.stream(prompt, {
   structuredOutput: { schema: PrerequisitesSchema },
@@ -449,7 +615,10 @@ await stream.processDataStream({
         { text: "Multi-mode agents (Plan, Build, Review)", icon: "Layers" },
         { text: "Zod-validated state schema", icon: "Box" },
         { text: "Built-in event subscribe for the UI", icon: "Radio" },
-        { text: "Subagents, workspaces, model switching, tool approvals", icon: "Workflow" },
+        {
+          text: "Subagents, workspaces, model switching, tool approvals",
+          icon: "Workflow",
+        },
       ],
       code: `const harness = new Harness({
   id: "my-harness",
@@ -478,9 +647,15 @@ await harness.sendMessage({ content: "..." });`,
       subtitle: "Two weeks ago — a recruiter copilot from scratch",
       bullets: [
         { text: "One harness per recruiting mission", icon: "Cpu" },
-        { text: "Phases: define posting → swipe personas → set prerequisites → validate", icon: "GitBranch" },
+        {
+          text: "Phases: define posting → swipe personas → set prerequisites → validate",
+          icon: "GitBranch",
+        },
         { text: "Each phase has its own prompt and toolset", icon: "Layers" },
-        { text: "The agent reads and updates mission state at any time", icon: "Database" },
+        {
+          text: "The agent reads and updates mission state at any time",
+          icon: "Database",
+        },
       ],
       code: `export function createRecruiterHarness(resourceId: string) {
   return new Harness({
@@ -511,10 +686,22 @@ await harness.sendMessage({ content: "..." });`,
     props: {
       subtitle: "Single Zod schema = single source of truth",
       bullets: [
-        { text: "The agent reads state to know what phase it's in", icon: "Eye" },
-        { text: "Tools mutate state, never the database directly", icon: "Wrench" },
-        { text: "Frontend listens to state changes and re-renders", icon: "Radio" },
-        { text: "Same schema everywhere — the entire system is type-safe", icon: "Shield" },
+        {
+          text: "The agent reads state to know what phase it's in",
+          icon: "Eye",
+        },
+        {
+          text: "Tools mutate state, never the database directly",
+          icon: "Wrench",
+        },
+        {
+          text: "Frontend listens to state changes and re-renders",
+          icon: "Radio",
+        },
+        {
+          text: "Same schema everywhere — the entire system is type-safe",
+          icon: "Shield",
+        },
       ],
       code: `const missionStateSchema = z.object({
   missionDraft: z.object({
@@ -538,11 +725,21 @@ await harness.sendMessage({ content: "..." });`,
     section: "pattern",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Every action in your product becomes a tool the agent can invoke",
+      subtitle:
+        "Every action in your product becomes a tool the agent can invoke",
       bullets: [
-        { text: "Each tool is typed, validated, and observable", icon: "Shield" },
-        { text: "Agent decides when to call them based on user intent", icon: "Brain" },
-        { text: "Tools mutate harness state → events fire → UI updates", icon: "Activity" },
+        {
+          text: "Each tool is typed, validated, and observable",
+          icon: "Shield",
+        },
+        {
+          text: "Agent decides when to call them based on user intent",
+          icon: "Brain",
+        },
+        {
+          text: "Tools mutate harness state → events fire → UI updates",
+          icon: "Activity",
+        },
       ],
       code: `export const generatePersonas = createTool({
   id: "generate-personas",
@@ -573,8 +770,14 @@ await harness.sendMessage({ content: "..." });`,
       subtitle: "The system prompt depends on the current state",
       bullets: [
         { text: "One agent definition, multiple behaviors", icon: "Layers" },
-        { text: "Prompt regenerated on every turn from harness state", icon: "RotateCw" },
-        { text: "No fragile state machines hidden inside the prompt", icon: "Shield" },
+        {
+          text: "Prompt regenerated on every turn from harness state",
+          icon: "RotateCw",
+        },
+        {
+          text: "No fragile state machines hidden inside the prompt",
+          icon: "Shield",
+        },
       ],
       code: `export const recruiterAgent = new Agent({
   id: "recruiter",
@@ -598,10 +801,22 @@ await harness.sendMessage({ content: "..." });`,
     props: {
       subtitle: "The agent can pause, wait for the user, then continue",
       bullets: [
-        { text: "Agent proposes a plan → state machine enters 'waiting'", icon: "Activity" },
-        { text: "User reviews, edits, approves → state machine resumes", icon: "Users" },
-        { text: "Conversation persists across rounds via memory + threads", icon: "Brain" },
-        { text: "This is how harnesses feel collaborative, not robotic", icon: "Sparkles" },
+        {
+          text: "Agent proposes a plan → state machine enters 'waiting'",
+          icon: "Activity",
+        },
+        {
+          text: "User reviews, edits, approves → state machine resumes",
+          icon: "Users",
+        },
+        {
+          text: "Conversation persists across rounds via memory + threads",
+          icon: "Brain",
+        },
+        {
+          text: "This is how harnesses feel collaborative, not robotic",
+          icon: "Sparkles",
+        },
       ],
       code: `while (!aborted) {
   await harness.setState({ status: "waiting" });
@@ -635,7 +850,8 @@ await harness.sendMessage({ content: "..." });`,
         {
           icon: "AlertTriangle",
           title: "Error classification",
-          description: "Rate-limit / overflow / provider down → retry with backoff",
+          description:
+            "Rate-limit / overflow / provider down → retry with backoff",
           color: "#8b5cf6",
         },
         {
@@ -701,7 +917,7 @@ await harness.sendMessage({ content: "..." });`,
           "One input. Captures intent.",
           "Agent picks the right tools",
           "Rich UI rendered inline",
-          "\"Saves clicks\" is the entire premise",
+          '"Saves clicks" is the entire premise',
         ],
         icon: "Sparkles",
         color: "#f43f5e",
@@ -715,7 +931,8 @@ await harness.sendMessage({ content: "..." });`,
     component: "CalloutSlide",
     props: {
       title: "Intent first",
-      callout: "The user describes what they want. The harness figures out how. The UI is what the harness chooses to show.",
+      callout:
+        "The user describes what they want. The harness figures out how. The UI is what the harness chooses to show.",
       icon: "Sparkles",
       kind: "insight",
     },
@@ -771,7 +988,8 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "year-of-harnesses",
     title: "2026 is the year of harnesses",
-    subtitle: "The pattern has a name. Mastra ships it. Anthropic productionizes it. Your turn.",
+    subtitle:
+      "The pattern has a name. Mastra ships it. Anthropic productionizes it. Your turn.",
     section: "vision",
     component: "HeroSlide",
     props: {
