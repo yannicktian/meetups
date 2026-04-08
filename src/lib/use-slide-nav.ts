@@ -44,10 +44,10 @@ export function useSlideNav(slides: Slide[]) {
   }, [slides]);
 
   const goTo = useCallback(
-    (index: number) => {
+    (index: number, options?: { instant?: boolean }) => {
       const clamped = Math.max(0, Math.min(slides.length - 1, index));
       document.getElementById(slides[clamped].id)?.scrollIntoView({
-        behavior: "smooth",
+        behavior: options?.instant ? "instant" : "smooth",
         inline: "start",
         block: "nearest",
       });
@@ -55,11 +55,11 @@ export function useSlideNav(slides: Slide[]) {
     [slides]
   );
 
-  // Jump to the first slide of a given section
+  // Jump to the first slide of a given section — instant, no intermediate scroll
   const goToSection = useCallback(
     (sectionId: SlideSection) => {
       const idx = slides.findIndex((s) => s.section === sectionId);
-      if (idx !== -1) goTo(idx);
+      if (idx !== -1) goTo(idx, { instant: true });
     },
     [slides, goTo]
   );
