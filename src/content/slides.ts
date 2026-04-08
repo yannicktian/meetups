@@ -88,15 +88,15 @@ export const slides: Slide[] = [
 
 — Harness Engineering, latent.space`,
       codeLang: "text",
-      codeCaption: "latent.space/p/harness-eng — published yesterday",
+      codeCaption: "latent.space/p/harness-eng — published 2 days ago",
     },
   },
 
-  // ─── ACT II: THE JOURNEY ─────────────────────────────────
+  // ─── ALPHA ───────────────────────────────────────────────
   {
     id: "alpha-transition",
-    title: "Act I — The Journey",
-    subtitle: "How we ended up here",
+    title: "Alpha",
+    subtitle: "Where it all started",
     section: "alpha",
     component: "TransitionSlide",
     props: { color: "#10b981" },
@@ -117,7 +117,7 @@ export const slides: Slide[] = [
   },
   {
     id: "alpha-intro",
-    title: "Alpha",
+    title: "Meet Alpha",
     section: "alpha",
     component: "NarrativeSlide",
     props: {
@@ -178,6 +178,16 @@ export const slides: Slide[] = [
       kind: "warning",
     },
   },
+
+  // ─── SAAS ────────────────────────────────────────────────
+  {
+    id: "saas-transition",
+    title: "SaaS",
+    subtitle: "Selling Alpha",
+    section: "saas",
+    component: "TransitionSlide",
+    props: { color: "#f59e0b" },
+  },
   {
     id: "saas-pivot",
     title: "From internal tool to SaaS",
@@ -193,10 +203,10 @@ export const slides: Slide[] = [
     },
   },
 
-  // ─── ACT III: THE IN-APP AGENT ───────────────────────────
+  // ─── IN-APP AGENT ────────────────────────────────────────
   {
     id: "in-app-transition",
-    title: "Act II — The In-App Agent",
+    title: "In-App Agent",
     subtitle: "Letting recruiters do it themselves",
     section: "agent",
     component: "TransitionSlide",
@@ -297,31 +307,32 @@ await stream.processDataStream({
     },
   },
 
-  // ─── ACT IV: THE REALIZATION ─────────────────────────────
+  // ─── THE PATTERN (REALIZATION) ───────────────────────────
   {
-    id: "realization-transition",
-    title: "Act III — The Realization",
+    id: "pattern-transition",
+    title: "The Pattern",
     subtitle: "We were building harnesses all along",
-    section: "future",
+    section: "pattern",
     component: "TransitionSlide",
     props: { color: "#8b5cf6" },
   },
   {
     id: "claude-code-quote",
     title: "What is Claude Code, really?",
-    section: "future",
+    section: "pattern",
     component: "QuoteSlide",
     props: {
       quote:
         "The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code.",
       author: "Anthropic",
       source: "docs.claude.com/en/api/agent-sdk",
+      accent: "#8b5cf6",
     },
   },
   {
     id: "claude-code-anatomy",
     title: "The anatomy of a coding harness",
-    section: "future",
+    section: "pattern",
     component: "GridSlide",
     props: {
       subtitle: "Claude Code is the canonical example",
@@ -369,19 +380,20 @@ await stream.processDataStream({
   {
     id: "mastra-quote",
     title: "And the pattern just got a name",
-    section: "future",
+    section: "pattern",
     component: "QuoteSlide",
     props: {
       quote:
         "The Harness is the core orchestration layer of the Mastra framework — multi-mode agent interactions, shared state, and persistent thread management.",
       author: "Mastra docs",
       source: "mastra.ai/reference/harness · Feb 2026",
+      accent: "#8b5cf6",
     },
   },
   {
     id: "harness-definition",
     title: "What is a harness?",
-    section: "future",
+    section: "pattern",
     component: "GridSlide",
     props: {
       subtitle: "An agent loop that owns a domain — six pillars",
@@ -429,7 +441,7 @@ await stream.processDataStream({
   {
     id: "mastra-harness-code",
     title: "Mastra ships the Harness class",
-    section: "future",
+    section: "pattern",
     component: "NarrativeSlide",
     props: {
       subtitle: "What was a pattern is now a primitive",
@@ -460,7 +472,7 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "kitsune-harness-code",
     title: "Building Ernest in 48 hours",
-    section: "future",
+    section: "pattern",
     component: "NarrativeSlide",
     props: {
       subtitle: "Two weeks ago — a recruiter copilot from scratch",
@@ -494,7 +506,7 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "typed-state",
     title: "Typed state is the foundation",
-    section: "future",
+    section: "pattern",
     component: "NarrativeSlide",
     props: {
       subtitle: "Single Zod schema = single source of truth",
@@ -523,7 +535,7 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "tools-as-features",
     title: "Tools = product features",
-    section: "future",
+    section: "pattern",
     component: "NarrativeSlide",
     props: {
       subtitle: "Every action in your product becomes a tool the agent can invoke",
@@ -555,7 +567,7 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "phase-aware-instructions",
     title: "Phase-aware instructions",
-    section: "future",
+    section: "pattern",
     component: "NarrativeSlide",
     props: {
       subtitle: "The system prompt depends on the current state",
@@ -581,7 +593,7 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "multi-round",
     title: "Multi-round iteration",
-    section: "future",
+    section: "pattern",
     component: "NarrativeSlide",
     props: {
       subtitle: "The agent can pause, wait for the user, then continue",
@@ -608,7 +620,7 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "reliability",
     title: "What makes harnesses production-ready",
-    section: "future",
+    section: "pattern",
     component: "GridSlide",
     props: {
       subtitle: "The boring parts are where harnesses earn their keep",
@@ -654,19 +666,19 @@ await harness.sendMessage({ content: "..." });`,
     },
   },
 
-  // ─── ACT V: THE VISION ───────────────────────────────────
+  // ─── THE VISION ──────────────────────────────────────────
   {
     id: "vision-transition",
-    title: "Act IV — The Vision",
+    title: "The Vision",
     subtitle: "What this changes",
-    section: "future",
+    section: "vision",
     component: "TransitionSlide",
-    props: { color: "#6366f1" },
+    props: { color: "#f43f5e" },
   },
   {
     id: "death-of-menus",
     title: "The death of menus",
-    section: "future",
+    section: "vision",
     component: "ComparisonSlide",
     props: {
       subtitle: "How we used to ship software vs. how we ship it now",
@@ -692,14 +704,14 @@ await harness.sendMessage({ content: "..." });`,
           "\"Saves clicks\" is the entire premise",
         ],
         icon: "Sparkles",
-        color: "#6366f1",
+        color: "#f43f5e",
       },
     },
   },
   {
     id: "intent-first-callout",
     title: "",
-    section: "future",
+    section: "vision",
     component: "CalloutSlide",
     props: {
       title: "Intent first",
@@ -711,7 +723,7 @@ await harness.sendMessage({ content: "..." });`,
   {
     id: "your-harness",
     title: "Your harness, today",
-    section: "future",
+    section: "vision",
     component: "GridSlide",
     props: {
       subtitle: "Pick a domain. Build the harness. Ship it.",
@@ -751,7 +763,7 @@ await harness.sendMessage({ content: "..." });`,
           icon: "HelpCircle",
           title: "What's yours?",
           description: "Every domain that has a product can have a harness",
-          color: "#6366f1",
+          color: "#f43f5e",
         },
       ],
     },
@@ -760,7 +772,7 @@ await harness.sendMessage({ content: "..." });`,
     id: "year-of-harnesses",
     title: "2026 is the year of harnesses",
     subtitle: "The pattern has a name. Mastra ships it. Anthropic productionizes it. Your turn.",
-    section: "future",
+    section: "vision",
     component: "HeroSlide",
     props: {
       badge: "Build yours · @yannicktian · gojob.com",
@@ -770,7 +782,7 @@ await harness.sendMessage({ content: "..." });`,
     id: "thank-you",
     title: "Merci",
     subtitle: "Questions?",
-    section: "future",
+    section: "vision",
     component: "HeroSlide",
     props: {
       badge: "github.com/yannicktian/meetups · meetups-talk.vercel.app",

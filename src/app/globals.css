@@ -27,17 +27,19 @@
   --alpha-soft: #ecfdf5;
   --saas-soft: #fffbeb;
   --agent-soft: #fdf2f8;
-  --future-soft: #f5f3ff;
+  --pattern-soft: #f5f3ff;
+  --vision-soft: #fff1f2;
 
   /* Gradient */
   --gradient-start: #6366f1;
   --gradient-end: #db2777;
+
+  /* Top nav bar height */
+  --nav-height: 64px;
 }
 
 html {
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  overflow-y: scroll;
 }
 
 body {
@@ -45,6 +47,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
   font-feature-settings: "ss01", "cv01", "cv11";
+  overflow: hidden;
 }
 
 ::selection {
@@ -52,7 +55,7 @@ body {
   color: white;
 }
 
-/* Subtle scrollbar */
+/* Subtle scrollbar (for horizontal scroll containers) */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -66,4 +69,13 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* Hide scrollbar on the slides deck container */
+.slides-deck-container::-webkit-scrollbar {
+  display: none;
+}
+.slides-deck-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }

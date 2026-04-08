@@ -2,6 +2,7 @@
 
 import { useSlideNav } from "@/lib/use-slide-nav";
 import { SlideWrapper } from "./slide-wrapper";
+import { TopNavBar } from "./top-nav-bar";
 import { registry } from "@/lib/registry";
 import type { Slide } from "@/lib/types";
 
@@ -10,11 +11,15 @@ type Props = {
 };
 
 export function SlidesDeck({ slides }: Props) {
-  const { currentIndex, total } = useSlideNav(slides);
+  const { currentIndex, total, currentSection, goToSection } = useSlideNav(slides);
 
   return (
     <>
-      <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
+      {/* Top navigation bar */}
+      <TopNavBar currentSection={currentSection} onSectionClickAction={goToSection} />
+
+      {/* Horizontal scroll container */}
+      <main className="slides-deck-container h-screen w-screen overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex flex-row">
         {slides.map((slide) => {
           const Component = registry[slide.component];
           if (!Component) {
@@ -32,7 +37,7 @@ export function SlidesDeck({ slides }: Props) {
         })}
       </main>
 
-      {/* Progress bar */}
+      {/* Progress bar at the bottom */}
       <div className="fixed bottom-0 left-0 right-0 h-1 bg-[var(--bg-surface-alt)] z-50">
         <div
           className="h-full bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] transition-all duration-300"
@@ -41,7 +46,7 @@ export function SlidesDeck({ slides }: Props) {
       </div>
 
       {/* Slide counter */}
-      <div className="fixed bottom-4 right-6 text-xs text-[var(--text-muted)] font-mono z-50 bg-white/80 backdrop-blur px-2 py-1 rounded-md border border-[var(--border)]">
+      <div className="fixed bottom-3 right-6 text-xs text-[var(--text-muted)] font-mono z-50 bg-white/80 backdrop-blur px-2 py-1 rounded-md border border-[var(--border)]">
         {currentIndex + 1} / {total}
       </div>
     </>
