@@ -38,7 +38,7 @@ export function TopNavBar({ currentSection, onSectionClickAction }: Props) {
               <button
                 key={section.id}
                 onClick={() => onSectionClickAction(section.id)}
-                className="relative px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap flex-shrink-0"
+                className="relative px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap flex-shrink-0 cursor-pointer hover:opacity-90"
                 style={{
                   color: isActive ? "white" : "var(--text-secondary)",
                 }}
