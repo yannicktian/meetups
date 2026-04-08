@@ -48,63 +48,122 @@ export const slides: Slide[] = [
   },
   {
     id: "hook",
-    title: "Show of hands",
+    title: "Who here uses Claude Code, Codex, or another coding agent every day?",
     section: "intro",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Who here uses Claude Code or another coding agent every day?",
       size: "large",
       bullets: [
-        { text: "You're not just using an AI assistant", icon: "Sparkles" },
         {
-          text: "You're using a harness — agent loop + tools + skills + memory + UI",
-          icon: "Workflow",
+          text: "You're not just using an AI assistant.",
+          icon: "Sparkles",
         },
         {
-          text: "Today: how this same pattern is going to reshape every product you build",
-          icon: "Zap",
+          text: "You're using a harness — agent loop, state, tools, memory, skills, UI.",
+          icon: "Workflow",
           highlight: true,
+        },
+        {
+          text: "And in the next 25 minutes, you'll see why every product is about to be built around one.",
+          icon: "Zap",
         },
       ],
     },
   },
   {
-    id: "harness-engineering",
-    title: "Harness Engineering",
+    id: "models-are-powerful",
+    title: "Models are powerful.",
     section: "intro",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Three years, three paradigms",
+      size: "large",
       bullets: [
         {
-          text: "2023 — Prompt engineering: craft the perfect instructions",
-          icon: "MessageSquare",
-        },
-        {
-          text: "2024-25 — Context engineering: give the model the right context",
-          icon: "Database",
-        },
-        {
-          text: "2026 — Harness engineering: build systems where the model makes intelligent choices",
-          icon: "Cpu",
+          text: "But raw, they can't run inside your product.",
           highlight: true,
         },
       ],
-      code: `// Latent Space, April 2026
-
-"When the agent failed,
- instead of prompting it better
- or to 'try harder,'
- the team would look at:
-
-  what capability,
-  what context,
-  what structure
-  is missing?"
-
-— Harness Engineering, latent.space`,
-      codeLang: "text",
-      codeCaption: "latent.space/p/harness-eng — published 2 days ago",
+      tags: [
+        "no state",
+        "no tools",
+        "no user memory",
+        "no streaming UI",
+        "no multi-tenant safety",
+      ],
+      tagsVariant: "muted",
+    },
+  },
+  {
+    id: "wrap-in-harness",
+    title: "So we wrap them in a harness.",
+    section: "intro",
+    component: "NarrativeSlide",
+    props: {
+      size: "large",
+      bullets: [
+        {
+          text: "The layer that gives the model what it can't do alone — orchestrated, observable, in-product.",
+          icon: "Workflow",
+        },
+      ],
+      tags: [
+        "state",
+        "tools",
+        "flow",
+        "memory",
+        "UI",
+        "reliability",
+        "lifecycle",
+      ],
+      tagsVariant: "accent",
+    },
+  },
+  {
+    id: "harness-cloud",
+    title: "",
+    section: "intro",
+    component: "HarnessCloudSlide",
+    props: {
+      stage1Heading: "And a harness is a lot of things.",
+      stage2Heading: "Tweaking all of this is harness engineering.",
+      stage2Subtitle: "And 2026 is the year we get serious about it.",
+      buckets: [
+        {
+          label: "State",
+          color: "#6366f1",
+          chips: ["typed schema", "multi-tenant filter", "partial JSON", "single source of truth"],
+        },
+        {
+          label: "Tools = features",
+          color: "#8b5cf6",
+          chips: ["input validation", "permission checks", "idempotency", "audit log"],
+        },
+        {
+          label: "Flow",
+          color: "#ec4899",
+          chips: ["modes", "phase-aware prompts", "multi-round", "pause/resume"],
+        },
+        {
+          label: "Memory",
+          color: "#10b981",
+          chips: ["thread persistence", "user facts", "embeddings cache", "observational memory"],
+        },
+        {
+          label: "UI",
+          color: "#06b6d4",
+          chips: ["event subscribe", "optimistic UI", "thinking indicators"],
+        },
+        {
+          label: "Reliability",
+          color: "#f59e0b",
+          chips: ["token budgets", "retries", "error classification", "provider fallback"],
+        },
+        {
+          label: "Lifecycle",
+          color: "#f43f5e",
+          chips: ["rate limits", "prompt caching", "evals in production"],
+        },
+      ],
     },
   },
 
