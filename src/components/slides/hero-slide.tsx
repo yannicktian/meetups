@@ -2,13 +2,29 @@
 
 import { motion } from "framer-motion";
 
+type HeroEvent = {
+  name?: string;
+  date?: string;
+  location?: string;
+};
+
 type Props = {
   title: string;
   subtitle?: string;
   badge?: string;
+  event?: HeroEvent;
+  hosts?: string;
+  acknowledgment?: string;
 };
 
-export function HeroSlide({ title, subtitle, badge }: Props) {
+export function HeroSlide({
+  title,
+  subtitle,
+  badge,
+  event,
+  hosts,
+  acknowledgment,
+}: Props) {
   return (
     <div className="flex flex-col items-center justify-center text-center gap-8 max-w-5xl mx-auto">
       {badge && (
@@ -38,6 +54,48 @@ export function HeroSlide({ title, subtitle, badge }: Props) {
         >
           {subtitle}
         </motion.p>
+      )}
+
+      {/* Event details block */}
+      {event && (
+        <motion.div
+          className="flex flex-col gap-2 items-center mt-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+        >
+          {event.name && (
+            <div className="text-base md:text-lg font-bold text-[var(--text-primary)]">
+              {event.name}
+            </div>
+          )}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm md:text-base text-[var(--text-secondary)]">
+            {event.date && <span className="font-medium">{event.date}</span>}
+            {event.date && event.location && <span className="text-[var(--text-muted)]">·</span>}
+            {event.location && <span>{event.location}</span>}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Hosts + acknowledgment */}
+      {(hosts || acknowledgment) && (
+        <motion.div
+          className="flex flex-col gap-1 items-center mt-2 pt-6 border-t border-[var(--border)] w-full max-w-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+        >
+          {hosts && (
+            <div className="text-sm md:text-base text-[var(--text-secondary)]">
+              Hosted by <span className="font-bold text-[var(--text-primary)]">{hosts}</span>
+            </div>
+          )}
+          {acknowledgment && (
+            <div className="text-xs md:text-sm text-[var(--text-muted)] italic">
+              {acknowledgment}
+            </div>
+          )}
+        </motion.div>
       )}
     </div>
   );

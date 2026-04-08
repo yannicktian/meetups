@@ -1,7 +1,7 @@
 import type { Slide } from "@/lib/types";
 
 export const slides: Slide[] = [
-  // ─── ACT I: SETUP ────────────────────────────────────────
+  // ─── INTRO ───────────────────────────────────────────────
   {
     id: "hero",
     title: "2026: The Year of Harnesses",
@@ -9,7 +9,35 @@ export const slides: Slide[] = [
     section: "intro",
     component: "HeroSlide",
     props: {
-      badge: "Developer AI.xperience — Yannick Tian, Gojob",
+      badge: "Developer AI.xperience",
+      event: {
+        name: "Developer AI.xperience night",
+        date: "April 10, 2026",
+        location: "Marseille",
+      },
+      hosts: "Qalico × Gojob",
+      acknowledgment: "First of a long series — thank you to both teams for hosting",
+    },
+  },
+  {
+    id: "about-me",
+    title: "",
+    section: "intro",
+    component: "AboutMeSlide",
+    props: {
+      name: "Yannick Tian",
+      role: "Staff Product AI Engineer",
+      company: "Gojob",
+      avatar: "/avatar_YT_small.jpg",
+      bullets: [
+        { text: "Driving agent building and observability for two years", icon: "Cpu" },
+        { text: "Shipped Alpha — 3M conversations in production", icon: "MessageSquare" },
+        { text: "Now building the In-App Agent for our SaaS customers", icon: "Sparkles" },
+      ],
+      links: [
+        { label: "@yannicktian" },
+        { label: "gojob.com" },
+      ],
     },
   },
   {
@@ -18,84 +46,50 @@ export const slides: Slide[] = [
     section: "intro",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Who here uses Claude Code, Cursor, or Windsurf every day?",
+      subtitle: "Who here uses Claude Code or another coding agent every day?",
+      size: "large",
       bullets: [
         { text: "You're not just using an AI assistant", icon: "Sparkles" },
         { text: "You're using a harness — agent loop + tools + skills + memory + UI", icon: "Workflow" },
-        { text: "Today: how this same pattern is going to reshape every product you build", icon: "Zap" },
-      ],
-    },
-  },
-  {
-    id: "claude-code-quote",
-    title: "What is Claude Code, really?",
-    section: "intro",
-    component: "QuoteSlide",
-    props: {
-      quote:
-        "The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code.",
-      author: "Anthropic",
-      source: "docs.claude.com/en/api/agent-sdk",
-    },
-  },
-  {
-    id: "claude-code-anatomy",
-    title: "The anatomy of a coding harness",
-    section: "intro",
-    component: "GridSlide",
-    props: {
-      subtitle: "Claude Code is the canonical example",
-      columns: 3,
-      items: [
         {
-          icon: "RotateCw",
-          title: "Agent loop",
-          description: "Autonomous reasoning + tool use",
-          color: "#6366f1",
-        },
-        {
-          icon: "Wrench",
-          title: "Built-in tools",
-          description: "Read, Edit, Bash, Glob, Grep, WebFetch",
-          color: "#6366f1",
-        },
-        {
-          icon: "GraduationCap",
-          title: "Skills",
-          description: "Composable capabilities (.claude/skills/*.md)",
-          color: "#6366f1",
-        },
-        {
-          icon: "Plug",
-          title: "MCP servers",
-          description: "External systems — Figma, Linear, your DB",
-          color: "#6366f1",
-        },
-        {
-          icon: "Users",
-          title: "Subagents",
-          description: "Specialized contexts for focused tasks",
-          color: "#6366f1",
-        },
-        {
-          icon: "Brain",
-          title: "Hooks + Memory",
-          description: "Side effects + persistent context (CLAUDE.md)",
-          color: "#6366f1",
+          text: "Today: how this same pattern is going to reshape every product you build",
+          icon: "Zap",
+          highlight: true,
         },
       ],
     },
   },
   {
-    id: "mastra-quote",
-    title: "And the pattern just got a name",
+    id: "harness-engineering",
+    title: "Harness Engineering",
     section: "intro",
-    component: "QuoteSlide",
+    component: "NarrativeSlide",
     props: {
-      quote:
-        "The Harness is the core orchestration layer of the Mastra framework — multi-mode agent interactions, shared state, and persistent thread management.",
-      author: "Mastra docs",
-      source: "mastra.ai/reference/harness · Feb 2026",
+      subtitle: "Three years, three paradigms",
+      bullets: [
+        { text: "2023 — Prompt engineering: craft the perfect instructions", icon: "MessageSquare" },
+        { text: "2024-25 — Context engineering: give the model the right context", icon: "Database" },
+        {
+          text: "2026 — Harness engineering: build systems where the model makes intelligent choices",
+          icon: "Cpu",
+          highlight: true,
+        },
+      ],
+      code: `// Latent Space, April 2026
+
+"When the agent failed,
+ instead of prompting it better
+ or to 'try harder,'
+ the team would look at:
+
+  what capability,
+  what context,
+  what structure
+  is missing?"
+
+— Harness Engineering, latent.space`,
+      codeLang: "text",
+      codeCaption: "latent.space/p/harness-eng — published yesterday",
     },
   },
 
@@ -312,6 +306,78 @@ await stream.processDataStream({
     section: "future",
     component: "TransitionSlide",
     props: { color: "#8b5cf6" },
+  },
+  {
+    id: "claude-code-quote",
+    title: "What is Claude Code, really?",
+    section: "future",
+    component: "QuoteSlide",
+    props: {
+      quote:
+        "The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code.",
+      author: "Anthropic",
+      source: "docs.claude.com/en/api/agent-sdk",
+    },
+  },
+  {
+    id: "claude-code-anatomy",
+    title: "The anatomy of a coding harness",
+    section: "future",
+    component: "GridSlide",
+    props: {
+      subtitle: "Claude Code is the canonical example",
+      columns: 3,
+      items: [
+        {
+          icon: "RotateCw",
+          title: "Agent loop",
+          description: "Autonomous reasoning + tool use",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Wrench",
+          title: "Built-in tools",
+          description: "Read, Edit, Bash, Glob, Grep, WebFetch",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "GraduationCap",
+          title: "Skills",
+          description: "Composable capabilities (.claude/skills/*.md)",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Plug",
+          title: "MCP servers",
+          description: "External systems — Figma, Linear, your DB",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Users",
+          title: "Subagents",
+          description: "Specialized contexts for focused tasks",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Brain",
+          title: "Hooks + Memory",
+          description: "Side effects + persistent context (CLAUDE.md)",
+          color: "#8b5cf6",
+        },
+      ],
+    },
+  },
+  {
+    id: "mastra-quote",
+    title: "And the pattern just got a name",
+    section: "future",
+    component: "QuoteSlide",
+    props: {
+      quote:
+        "The Harness is the core orchestration layer of the Mastra framework — multi-mode agent interactions, shared state, and persistent thread management.",
+      author: "Mastra docs",
+      source: "mastra.ai/reference/harness · Feb 2026",
+    },
   },
   {
     id: "harness-definition",
