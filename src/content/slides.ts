@@ -123,7 +123,7 @@ export const slides: Slide[] = [
     section: "alpha",
     component: "NarrativeSlide",
     props: {
-      subtitle: "AI-powered marketplace for temporary workers",
+      subtitle: "HR tech — staffing temp workers instantly, at scale",
       bullets: [
         {
           text: "Thousands of job postings, millions of candidates",
