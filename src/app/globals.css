@@ -81,3 +81,27 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+/* Gentle floating bob for cloud chips.
+ * Applied on an inner <span>, so the parent is free for Framer transforms. */
+@keyframes chip-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.chip-bob {
+  animation-name: chip-bob;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-bob {
+    animation: none;
+  }
+}

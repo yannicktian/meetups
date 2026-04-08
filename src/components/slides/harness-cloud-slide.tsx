@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { startTransition, useEffect, useMemo, useState } from "react";
-import { useStageNav } from "@/lib/stage-nav-context";
+import { motion } from "framer-motion";
+import { useMemo } from "react";
 import { useInView } from "@/lib/use-in-view";
 
 type Bucket = {
@@ -12,75 +11,31 @@ type Bucket = {
 };
 
 type Props = {
-  stage1Heading: string;
-  stage2Heading: string;
-  stage2Subtitle: string;
+  heading: string;
   buckets: Bucket[];
 };
 
-/** Two-stage chip-cloud → bucket-grid slide.
+/** Scattered chip cloud slide.
  *
- * Stage 1: chips drift in from random edge positions, heading reads
- *          `stage1Heading`.
- * Stage 2: chips animate into a structured grid grouped by bucket,
- *          heading crossfades to `stage2Heading` + `stage2Subtitle`.
+ * On each entry into view, chips burst from the center of the slide out to
+ * deterministic edge positions, then gently bob via a CSS keyframe animation
+ * on the inner span (so Framer's layout transforms never fight the bob).
  *
- * The slide registers `onNextRequest` / `onPrevRequest` interceptors
- * with the deck via `useStageNav`, so right/left arrows advance stages
- * before the deck moves slides. Reverse symmetry supported.
+ * Mirrors the "And a harness is a lot of things" slide in Mastra's agent
+ * harness workshop.
  */
-export function HarnessCloudSlide({
-  stage1Heading,
-  stage2Heading,
-  stage2Subtitle,
-  buckets,
-}: Props) {
-  const [stage, setStage] = useState<1 | 2>(1);
-  const stageNav = useStageNav();
-  const reducedMotion = useReducedMotion();
+export function HarnessCloudSlide({ heading, buckets }: Props) {
   const { ref: viewRef, isInView } = useInView(0.3);
-
-  // Reset stage to 1 when the slide leaves the viewport so the climax
-  // re-fires next time the slide comes into view.
-  useEffect(() => {
-    if (!isInView) {
-      startTransition(() => setStage(1));
-    }
-  }, [isInView]);
-
-  // Register stage interceptors so right/left arrows advance stage 1 → 2 →
-  // next slide and the reverse.
-  useEffect(() => {
-    if (!stageNav) return;
-    const slideId = "harness-cloud";
-    stageNav.register(slideId, {
-      onNextRequest: () => {
-        if (stage === 1) {
-          setStage(2);
-          return true; // consumed
-        }
-        return false; // let the deck advance to the next slide
-      },
-      onPrevRequest: () => {
-        if (stage === 2) {
-          setStage(1);
-          return true;
-        }
-        return false;
-      },
-    });
-    return () => stageNav.unregister(slideId);
-  }, [stage, stageNav]);
 
   type ChipMeta = {
     id: string;
     label: string;
     color: string;
-    bucketIdx: number;
-    bucketLabel: string;
-    stage1X: number; // percentage
-    stage1Y: number; // percentage
-    delay: number;
+    stage1X: number; // % of container width
+    stage1Y: number; // % of container height
+    bobDelay: number;
+    bobDuration: number;
+    enterDelay: number;
   };
 
   const chips = useMemo<ChipMeta[]>(() => {
@@ -92,40 +47,39 @@ export function HarnessCloudSlide({
     };
 
     const all: ChipMeta[] = [];
+    let orderIdx = 0;
     buckets.forEach((bucket, bucketIdx) => {
       bucket.chips.forEach((label, chipIdx) => {
-        const bandRoll = rand();
-        const xRoll = rand();
-        const yRoll = rand();
+        // Mastra-style edge placement: pick either the left/right edges or
+        // the top/bottom edges. The center 25%–75% band stays clear so the
+        // title never overlaps a chip.
+        const which = rand();
+        const sidePick = rand();
+        const along = rand();
 
-        // Four edge bands: top / bottom / left / right. Keeps the center
-        // ~25%-75% region clear so the heading card stays readable.
         let x: number;
         let y: number;
-        if (bandRoll < 0.25) {
-          x = 4 + xRoll * 88;
-          y = 3 + yRoll * 14;
-        } else if (bandRoll < 0.5) {
-          x = 4 + xRoll * 88;
-          y = 80 + yRoll * 17;
-        } else if (bandRoll < 0.75) {
-          x = 2 + xRoll * 20;
-          y = 18 + yRoll * 62;
+        if (which < 0.5) {
+          // Left or right edge band
+          x = sidePick < 0.5 ? 3 + along * 22 : 75 + along * 22;
+          y = 6 + rand() * 84;
         } else {
-          x = 74 + xRoll * 22;
-          y = 18 + yRoll * 62;
+          // Top or bottom edge band
+          x = 4 + along * 88;
+          y = sidePick < 0.5 ? 4 + rand() * 18 : 78 + rand() * 18;
         }
 
         all.push({
-          id: `chip-${bucketIdx}-${chipIdx}`,
+          id: `cloud-chip-${bucketIdx}-${chipIdx}`,
           label,
           color: bucket.color,
-          bucketIdx,
-          bucketLabel: bucket.label,
           stage1X: x,
           stage1Y: y,
-          delay: (bucketIdx * 4 + chipIdx) * 0.04,
+          bobDelay: rand() * 4,
+          bobDuration: 6 + rand() * 4,
+          enterDelay: orderIdx * 0.025,
         });
+        orderIdx += 1;
       });
     });
     return all;
@@ -136,109 +90,76 @@ export function HarnessCloudSlide({
       ref={viewRef as React.RefObject<HTMLDivElement>}
       className="relative w-full min-h-[70vh] flex flex-col items-center justify-center"
     >
-      {/* Heading — crossfades between stages */}
-      <div className="relative z-10 text-center max-w-3xl mx-auto px-6 py-8 bg-[var(--bg-primary)]/80 backdrop-blur-sm rounded-2xl">
-        <motion.h2
-          key={stage === 1 ? "h1" : "h2"}
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] leading-tight"
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          {stage === 1 ? stage1Heading : stage2Heading}
-        </motion.h2>
-        {stage === 2 && (
-          <motion.p
-            className="mt-4 text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)] font-light"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+      {/* Chip cloud — absolutely positioned layer behind the title */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {chips.map((chip) => (
+          <motion.div
+            key={chip.id}
+            className="absolute"
+            initial={{
+              left: "50%",
+              top: "50%",
+              x: "-50%",
+              y: "-50%",
+              opacity: 0,
+              scale: 0.3,
+            }}
+            animate={
+              isInView
+                ? {
+                    left: `${chip.stage1X}%`,
+                    top: `${chip.stage1Y}%`,
+                    x: "-50%",
+                    y: "-50%",
+                    opacity: 1,
+                    scale: 1,
+                  }
+                : {
+                    left: "50%",
+                    top: "50%",
+                    x: "-50%",
+                    y: "-50%",
+                    opacity: 0,
+                    scale: 0.3,
+                  }
+            }
+            transition={{
+              delay: isInView ? chip.enterDelay : 0,
+              duration: 0.85,
+              ease: [0.34, 1.56, 0.64, 1],
+            }}
           >
-            {stage2Subtitle}
-          </motion.p>
-        )}
-      </div>
-
-      {/* Stage 1: scattered chip cloud (absolutely positioned) */}
-      {stage === 1 && (
-        <div className="absolute inset-0 pointer-events-none">
-          {chips.map((chip) => (
-            <motion.span
-              key={chip.id}
-              layoutId={chip.id}
-              className="absolute inline-flex items-center px-2.5 py-1 rounded-full text-xs md:text-sm font-mono border whitespace-nowrap"
+            <span
+              className="chip-bob inline-flex items-center px-2.5 py-1 rounded-full text-xs md:text-sm font-mono border whitespace-nowrap"
               style={{
-                left: `${chip.stage1X}%`,
-                top: `${chip.stage1Y}%`,
-                borderColor: `${chip.color}40`,
+                borderColor: `${chip.color}55`,
                 color: chip.color,
-                background: `${chip.color}0f`,
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                ...(reducedMotion ? {} : { y: [0, -6, 0] }),
-              }}
-              transition={{
-                delay: chip.delay,
-                duration: 0.4,
-                ...(reducedMotion
-                  ? {}
-                  : {
-                      y: {
-                        duration: 6 + ((chip.delay * 10) % 4),
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: chip.delay + 0.4,
-                      },
-                    }),
+                // Solid slide bg so overlapping chips cleanly occlude each
+                // other instead of blending into an unreadable stack.
+                background: "var(--bg-primary)",
+                animationDelay: `${chip.bobDelay}s`,
+                animationDuration: `${chip.bobDuration}s`,
               }}
             >
               {chip.label}
-            </motion.span>
-          ))}
-        </div>
-      )}
+            </span>
+          </motion.div>
+        ))}
+      </div>
 
-      {/* Stage 2: bucket grid */}
-      {stage === 2 && (
-        <div className="relative z-0 w-full max-w-6xl mx-auto mt-8 px-6 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-          {buckets.map((bucket, bucketIdx) => (
-            <motion.div
-              key={bucket.label}
-              className="flex flex-col gap-2"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + bucketIdx * 0.05, duration: 0.4 }}
-            >
-              <div
-                className="text-xs md:text-sm font-semibold uppercase tracking-wide pb-1 border-b"
-                style={{ color: bucket.color, borderColor: `${bucket.color}40` }}
-              >
-                {bucket.label}
-              </div>
-              <div className="flex flex-col gap-1.5">
-                {bucket.chips.map((chipLabel, chipIdx) => (
-                  <motion.span
-                    key={`${bucket.label}-${chipLabel}`}
-                    layoutId={`chip-${bucketIdx}-${chipIdx}`}
-                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs md:text-sm font-mono border whitespace-nowrap"
-                    style={{
-                      borderColor: `${bucket.color}60`,
-                      color: bucket.color,
-                      background: `${bucket.color}14`,
-                    }}
-                    transition={{ type: "spring", stiffness: 180, damping: 22 }}
-                  >
-                    {chipLabel}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      )}
+      {/* Title — sits in front of the cloud, no card */}
+      <motion.div
+        className="relative z-10 inline-block text-center px-8 md:px-12 py-6 md:py-8"
+        initial={{ opacity: 0, y: -8 }}
+        animate={
+          isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }
+        }
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] leading-tight max-w-3xl">
+          {heading}
+        </h2>
+      </motion.div>
     </div>
   );
 }

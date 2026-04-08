@@ -47,8 +47,12 @@ export function SlideWrapper({ id, section, children }: Props) {
         style={{ background: accent, top: "var(--nav-height)" }}
       />
 
+      {/* Content container intentionally has no overflow clipping so child
+       * box-shadows (avatar, cards, code blocks, etc.) can extend beyond the
+       * content box. Tall slides must fit the viewport by their own layout —
+       * the parent <section> handles final clipping at the viewport edge. */}
       <motion.div
-        className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 md:px-12 lg:px-16 overflow-y-auto max-h-full"
+        className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 md:px-12 lg:px-16"
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.5, ease: "easeOut" }}

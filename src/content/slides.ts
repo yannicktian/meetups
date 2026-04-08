@@ -1,5 +1,89 @@
 import type { Slide } from "@/lib/types";
 
+/** The 7 buckets of harness engineering — the original talk structure,
+ * enriched with concerns pulled from Mastra's Agent Harness workshop
+ * (/workshops/decks/harness-workshop). Used by both the scattered "cloud"
+ * slide and the gathered "buckets" slide. */
+const HARNESS_BUCKETS = [
+  {
+    label: "State",
+    color: "#6366f1",
+    chips: [
+      "typed schema",
+      "multi-tenant filter",
+      "single source of truth",
+      "resume threads",
+      "session grants",
+    ],
+  },
+  {
+    label: "Tools = features",
+    color: "#8b5cf6",
+    chips: [
+      "input validation",
+      "permission checks",
+      "tool approval",
+      "MCP connections",
+      "subagent spawn",
+    ],
+  },
+  {
+    label: "Flow",
+    color: "#ec4899",
+    chips: [
+      "modes",
+      "phase-aware prompts",
+      "pause / resume",
+      "abort / steer",
+      "plan approval",
+    ],
+  },
+  {
+    label: "Memory",
+    color: "#10b981",
+    chips: [
+      "thread persistence",
+      "observational memory",
+      "memory compaction",
+      "prompt caching",
+      "observation threshold",
+    ],
+  },
+  {
+    label: "UI",
+    color: "#06b6d4",
+    chips: [
+      "event subscribe",
+      "stream parsing",
+      "thinking indicators",
+      "optimistic UI",
+      "multi-modal input",
+    ],
+  },
+  {
+    label: "Reliability",
+    color: "#f59e0b",
+    chips: [
+      "token budgets",
+      "error classification",
+      "provider fallback",
+      "model routing",
+      "error recovery",
+    ],
+  },
+  {
+    label: "Lifecycle",
+    color: "#f43f5e",
+    chips: [
+      "rate limits",
+      "cost tracking",
+      "hook system",
+      "token counting",
+      "auth / OAuth",
+    ],
+  },
+];
+
 export const slides: Slide[] = [
   // ─── INTRO ───────────────────────────────────────────────
   {
@@ -134,46 +218,19 @@ export const slides: Slide[] = [
     section: "intro",
     component: "HarnessCloudSlide",
     props: {
-      stage1Heading: "And a harness is a lot of things.",
-      stage2Heading: "Tweaking all of this is harness engineering.",
-      stage2Subtitle: "And 2026 is the year we get serious about it.",
-      buckets: [
-        {
-          label: "State",
-          color: "#6366f1",
-          chips: ["typed schema", "multi-tenant filter", "partial JSON", "single source of truth"],
-        },
-        {
-          label: "Tools = features",
-          color: "#8b5cf6",
-          chips: ["input validation", "permission checks", "idempotency", "audit log"],
-        },
-        {
-          label: "Flow",
-          color: "#ec4899",
-          chips: ["modes", "phase-aware prompts", "multi-round", "pause/resume"],
-        },
-        {
-          label: "Memory",
-          color: "#10b981",
-          chips: ["thread persistence", "user facts", "embeddings cache", "observational memory"],
-        },
-        {
-          label: "UI",
-          color: "#06b6d4",
-          chips: ["event subscribe", "optimistic UI", "thinking indicators"],
-        },
-        {
-          label: "Reliability",
-          color: "#f59e0b",
-          chips: ["token budgets", "retries", "error classification", "provider fallback"],
-        },
-        {
-          label: "Lifecycle",
-          color: "#f43f5e",
-          chips: ["rate limits", "prompt caching", "evals in production"],
-        },
-      ],
+      heading: "And a harness is a lot of things.",
+      buckets: HARNESS_BUCKETS,
+    },
+  },
+  {
+    id: "harness-buckets",
+    title: "",
+    section: "intro",
+    component: "HarnessBucketsSlide",
+    props: {
+      heading: "Tweaking all of this is harness engineering.",
+      subheading: "And 2026 is the year we get serious about it.",
+      buckets: HARNESS_BUCKETS,
     },
   },
 
