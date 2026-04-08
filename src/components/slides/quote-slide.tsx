@@ -10,20 +10,22 @@ type Props = {
 };
 
 export function QuoteSlide({ quote, author, source, accent }: Props) {
+  const accentColor = accent || "var(--accent)";
+
   return (
     <div className="flex flex-col items-center justify-center text-center gap-8 max-w-4xl mx-auto">
       <motion.div
-        className="text-7xl md:text-9xl leading-none font-serif"
-        style={{ color: accent || "var(--accent-bright)" }}
+        className="text-8xl md:text-[12rem] leading-none font-serif"
+        style={{ color: accentColor, opacity: 0.2 }}
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 0.6, scale: 1 }}
+        animate={{ opacity: 0.2, scale: 1 }}
         transition={{ duration: 0.6 }}
       >
         &ldquo;
       </motion.div>
 
       <motion.blockquote
-        className="text-2xl md:text-4xl font-light leading-snug text-[var(--text-primary)]"
+        className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight text-[var(--text-primary)] -mt-8 md:-mt-16"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.7 }}
@@ -38,8 +40,8 @@ export function QuoteSlide({ quote, author, source, accent }: Props) {
         transition={{ delay: 0.5 }}
       >
         <span
-          className="text-base md:text-lg font-semibold"
-          style={{ color: accent || "var(--accent-bright)" }}
+          className="text-base md:text-lg font-bold"
+          style={{ color: accentColor }}
         >
           — {author}
         </span>

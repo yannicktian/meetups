@@ -20,9 +20,9 @@ export const slides: Slide[] = [
     props: {
       subtitle: "Who here uses Claude Code, Cursor, or Windsurf every day?",
       bullets: [
-        "You're not just using an AI assistant",
-        "You're using a harness — an agent loop with tools, skills, memory, and a UI",
-        "Today: how this same pattern is going to reshape every product you build",
+        { text: "You're not just using an AI assistant", icon: "Sparkles" },
+        { text: "You're using a harness — agent loop + tools + skills + memory + UI", icon: "Workflow" },
+        { text: "Today: how this same pattern is going to reshape every product you build", icon: "Zap" },
       ],
     },
   },
@@ -42,16 +42,47 @@ export const slides: Slide[] = [
     id: "claude-code-anatomy",
     title: "The anatomy of a coding harness",
     section: "intro",
-    component: "NarrativeSlide",
+    component: "GridSlide",
     props: {
       subtitle: "Claude Code is the canonical example",
-      bullets: [
-        "Agent loop — autonomous reasoning + tool use",
-        "Built-in tools — Read, Edit, Bash, Glob, Grep, WebFetch",
-        "Skills — composable capabilities (.claude/skills/*.md)",
-        "MCP servers — external systems (Figma, Linear, your DB)",
-        "Subagents — specialized contexts for focused tasks",
-        "Hooks + Memory — deterministic side effects + persistent context",
+      columns: 3,
+      items: [
+        {
+          icon: "RotateCw",
+          title: "Agent loop",
+          description: "Autonomous reasoning + tool use",
+          color: "#6366f1",
+        },
+        {
+          icon: "Wrench",
+          title: "Built-in tools",
+          description: "Read, Edit, Bash, Glob, Grep, WebFetch",
+          color: "#6366f1",
+        },
+        {
+          icon: "GraduationCap",
+          title: "Skills",
+          description: "Composable capabilities (.claude/skills/*.md)",
+          color: "#6366f1",
+        },
+        {
+          icon: "Plug",
+          title: "MCP servers",
+          description: "External systems — Figma, Linear, your DB",
+          color: "#6366f1",
+        },
+        {
+          icon: "Users",
+          title: "Subagents",
+          description: "Specialized contexts for focused tasks",
+          color: "#6366f1",
+        },
+        {
+          icon: "Brain",
+          title: "Hooks + Memory",
+          description: "Side effects + persistent context (CLAUDE.md)",
+          color: "#6366f1",
+        },
       ],
     },
   },
@@ -62,9 +93,9 @@ export const slides: Slide[] = [
     component: "QuoteSlide",
     props: {
       quote:
-        "The Harness is the core orchestration layer of the Mastra framework — designed to manage multi-mode agent interactions, shared state, and persistent thread management.",
+        "The Harness is the core orchestration layer of the Mastra framework — multi-mode agent interactions, shared state, and persistent thread management.",
       author: "Mastra docs",
-      source: "mastra.ai/reference/harness/harness-class · Feb 2026",
+      source: "mastra.ai/reference/harness · Feb 2026",
     },
   },
 
@@ -85,9 +116,9 @@ export const slides: Slide[] = [
     props: {
       subtitle: "AI-powered temp work marketplace",
       bullets: [
-        "Thousands of job postings, millions of candidates",
-        "Recruiters drowning in screening calls before the best candidates apply",
-        "We started shipping AI to fix this in 2023",
+        { text: "Thousands of job postings, millions of candidates", icon: "Users" },
+        { text: "Recruiters drowning in screening calls before the best candidates apply", icon: "AlertTriangle" },
+        { text: "We started shipping AI to fix this in 2023", icon: "Sparkles" },
       ],
     },
   },
@@ -99,9 +130,9 @@ export const slides: Slide[] = [
     props: {
       subtitle: "Our recruiter assistant — prequalifies candidates via SMS",
       bullets: [
-        "Validates job posting prerequisites in a natural conversation",
-        "Recruiters only see candidates who pass the must-haves",
-        "Started as an internal tool. Worked too well to keep to ourselves.",
+        { text: "Validates job posting prerequisites in a natural conversation", icon: "MessageSquare" },
+        { text: "Recruiters only see candidates who pass the must-haves", icon: "CheckCircle2" },
+        { text: "Started internal. Worked too well to keep to ourselves.", icon: "TrendingUp" },
       ],
     },
   },
@@ -143,16 +174,15 @@ export const slides: Slide[] = [
   },
   {
     id: "alpha-lesson",
-    title: "The 80/20 lesson",
     section: "alpha",
-    component: "NarrativeSlide",
+    title: "",
+    component: "CalloutSlide",
     props: {
-      subtitle: "Building the AI was the easy 80%. Operating it was the other 80%.",
-      bullets: [
-        "Observability, scoring, anomaly detection, human-in-the-loop",
-        "Trust takes infrastructure, not just a good prompt",
-        "But the real lesson came from selling it",
-      ],
+      title: "The 80/20 lesson",
+      callout: "Building the AI was the easy 80%. Operating it was the other 80%.",
+      attribution: "Trust takes infrastructure, not just a good prompt",
+      icon: "Lightbulb",
+      kind: "warning",
     },
   },
   {
@@ -163,9 +193,9 @@ export const slides: Slide[] = [
     props: {
       subtitle: "Customers like France Travail and Persol wanted Alpha for themselves",
       bullets: [
-        "Same AI, customized per customer's recruiting needs",
-        "Onboarding was painful: weeks of round-trips with management to define prerequisites",
-        "Customers couldn't self-serve. We were the bottleneck.",
+        { text: "Same AI, customized per customer's recruiting needs", icon: "Building2" },
+        { text: "Onboarding was painful — weeks of round-trips with management", icon: "AlertTriangle" },
+        { text: "Customers couldn't self-serve. We were the bottleneck.", icon: "Zap" },
       ],
     },
   },
@@ -187,10 +217,10 @@ export const slides: Slide[] = [
     props: {
       subtitle: "What if the recruiter could just ask?",
       bullets: [
-        "Built on Mastra — agent + tools + RAG + MCP server for domain logic",
-        "Suggests prerequisites by retrieving similar job postings via vector search",
-        "Streams structured output to the UI — users see suggestions appear live",
-        "From weeks of round-trips → minutes of self-serve",
+        { text: "Built on Mastra — agent + tools + RAG + MCP server", icon: "Cpu" },
+        { text: "Suggests prerequisites by retrieving similar job postings via vector search", icon: "Database" },
+        { text: "Streams structured output to the UI — suggestions appear live", icon: "Activity" },
+        { text: "From weeks of round-trips → minutes of self-serve", icon: "Zap" },
       ],
     },
   },
@@ -225,11 +255,11 @@ export const slides: Slide[] = [
       subtitle: "Mastra Agent + RAG + MCP + Streaming UI",
       nodes: [
         { id: "frontend", label: "React Frontend", x: 30, y: 60, width: 150, height: 45, color: "#ec4899" },
-        { id: "stream", label: "Stream API", x: 220, y: 60, width: 130, height: 45 },
+        { id: "stream", label: "Stream API", x: 220, y: 60, width: 130, height: 45, color: "#ec4899" },
         { id: "agent", label: "Mastra Agent", x: 390, y: 60, width: 140, height: 45, color: "#8b5cf6" },
-        { id: "rag", label: "RAG (pgvector)", x: 220, y: 180, width: 150, height: 45 },
+        { id: "rag", label: "RAG (pgvector)", x: 220, y: 180, width: 150, height: 45, color: "#6366f1" },
         { id: "mcp", label: "MCP Server", x: 410, y: 180, width: 130, height: 45, color: "#6366f1" },
-        { id: "domain", label: "Domain DB", x: 410, y: 300, width: 130, height: 45 },
+        { id: "domain", label: "Domain DB", x: 410, y: 300, width: 130, height: 45, color: "#71717a" },
       ],
       edges: [
         { from: "frontend", to: "stream", label: "partial JSON", animated: true },
@@ -248,11 +278,11 @@ export const slides: Slide[] = [
     section: "agent",
     component: "NarrativeSlide",
     props: {
-      subtitle: "The frontend renders prerequisites as the agent generates them",
+      subtitle: "Partial JSON parsed on every chunk",
       bullets: [
-        "agent.stream() returns text-delta chunks",
-        "partial-json parses incomplete JSON on every chunk",
-        "React state updates → UI re-renders → users see suggestions appear live",
+        { text: "agent.stream() returns text-delta chunks", icon: "Activity" },
+        { text: "partial-json parses incomplete JSON live", icon: "Zap" },
+        { text: "React state updates → UI re-renders → users see suggestions appear", icon: "Sparkles" },
       ],
       code: `const stream = await agent.stream(prompt, {
   structuredOutput: { schema: PrerequisitesSchema },
@@ -287,16 +317,47 @@ await stream.processDataStream({
     id: "harness-definition",
     title: "What is a harness?",
     section: "future",
-    component: "NarrativeSlide",
+    component: "GridSlide",
     props: {
-      subtitle: "An agent loop that owns a domain",
-      bullets: [
-        "Typed state — single source of truth for the workflow",
-        "Tools — product features the agent can invoke",
-        "Modes/phases — dynamic instructions per workflow stage",
-        "Events — streaming UI updates on every state change",
-        "Memory + threads — persistent conversation context",
-        "Reliability — budget tracking, retry, observability, multi-tenant",
+      subtitle: "An agent loop that owns a domain — six pillars",
+      columns: 3,
+      items: [
+        {
+          icon: "Box",
+          title: "Typed state",
+          description: "Single Zod schema = single source of truth",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Wrench",
+          title: "Tools",
+          description: "Product features the agent can invoke",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "GitBranch",
+          title: "Modes & phases",
+          description: "Dynamic instructions per workflow stage",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Radio",
+          title: "Events",
+          description: "Streaming UI updates on every state change",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Brain",
+          title: "Memory + threads",
+          description: "Persistent conversation context",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Shield",
+          title: "Reliability",
+          description: "Budgets, retries, observability, multi-tenant",
+          color: "#8b5cf6",
+        },
       ],
     },
   },
@@ -308,10 +369,10 @@ await stream.processDataStream({
     props: {
       subtitle: "What was a pattern is now a primitive",
       bullets: [
-        "Multi-mode agents (Plan, Build, Review)",
-        "Zod-validated state schema",
-        "Built-in event subscribe for UI",
-        "Subagents, workspaces, model switching, tool approvals",
+        { text: "Multi-mode agents (Plan, Build, Review)", icon: "Layers" },
+        { text: "Zod-validated state schema", icon: "Box" },
+        { text: "Built-in event subscribe for the UI", icon: "Radio" },
+        { text: "Subagents, workspaces, model switching, tool approvals", icon: "Workflow" },
       ],
       code: `const harness = new Harness({
   id: "my-harness",
@@ -333,16 +394,16 @@ await harness.sendMessage({ content: "..." });`,
   },
   {
     id: "kitsune-harness-code",
-    title: "Hackathon: a recruiter harness in 48 hours",
+    title: "Building Ernest in 48 hours",
     section: "future",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Two weeks ago — building Ernest, the recruiter copilot",
+      subtitle: "Two weeks ago — a recruiter copilot from scratch",
       bullets: [
-        "One harness per recruiting mission",
-        "Phases: define posting → swipe personas → set prerequisites → validate",
-        "Each phase has its own prompt and toolset",
-        "The agent can read and update mission state at any time",
+        { text: "One harness per recruiting mission", icon: "Cpu" },
+        { text: "Phases: define posting → swipe personas → set prerequisites → validate", icon: "GitBranch" },
+        { text: "Each phase has its own prompt and toolset", icon: "Layers" },
+        { text: "The agent reads and updates mission state at any time", icon: "Database" },
       ],
       code: `export function createRecruiterHarness(resourceId: string) {
   return new Harness({
@@ -373,10 +434,10 @@ await harness.sendMessage({ content: "..." });`,
     props: {
       subtitle: "Single Zod schema = single source of truth",
       bullets: [
-        "The agent reads state to know what phase it's in",
-        "Tools mutate state, never the database directly",
-        "Frontend listens to state changes and re-renders",
-        "Same schema everywhere — the entire system is type-safe",
+        { text: "The agent reads state to know what phase it's in", icon: "Eye" },
+        { text: "Tools mutate state, never the database directly", icon: "Wrench" },
+        { text: "Frontend listens to state changes and re-renders", icon: "Radio" },
+        { text: "Same schema everywhere — the entire system is type-safe", icon: "Shield" },
       ],
       code: `const missionStateSchema = z.object({
   missionDraft: z.object({
@@ -402,9 +463,9 @@ await harness.sendMessage({ content: "..." });`,
     props: {
       subtitle: "Every action in your product becomes a tool the agent can invoke",
       bullets: [
-        "Each tool is typed, validated, and observable",
-        "Agent decides when to call them based on user intent",
-        "Tools mutate harness state → events fire → UI updates",
+        { text: "Each tool is typed, validated, and observable", icon: "Shield" },
+        { text: "Agent decides when to call them based on user intent", icon: "Brain" },
+        { text: "Tools mutate harness state → events fire → UI updates", icon: "Activity" },
       ],
       code: `export const generatePersonas = createTool({
   id: "generate-personas",
@@ -434,9 +495,9 @@ await harness.sendMessage({ content: "..." });`,
     props: {
       subtitle: "The system prompt depends on the current state",
       bullets: [
-        "One agent definition, multiple behaviors",
-        "Prompt regenerated on every turn from harness state",
-        "No fragile state machines hidden in the prompt",
+        { text: "One agent definition, multiple behaviors", icon: "Layers" },
+        { text: "Prompt regenerated on every turn from harness state", icon: "RotateCw" },
+        { text: "No fragile state machines hidden inside the prompt", icon: "Shield" },
       ],
       code: `export const recruiterAgent = new Agent({
   id: "recruiter",
@@ -460,10 +521,10 @@ await harness.sendMessage({ content: "..." });`,
     props: {
       subtitle: "The agent can pause, wait for the user, then continue",
       bullets: [
-        "Agent proposes a plan → state machine enters 'waiting'",
-        "User reviews, edits, approves → state machine resumes",
-        "Conversation persists across rounds via memory + threads",
-        "This is how harnesses feel collaborative, not robotic",
+        { text: "Agent proposes a plan → state machine enters 'waiting'", icon: "Activity" },
+        { text: "User reviews, edits, approves → state machine resumes", icon: "Users" },
+        { text: "Conversation persists across rounds via memory + threads", icon: "Brain" },
+        { text: "This is how harnesses feel collaborative, not robotic", icon: "Sparkles" },
       ],
       code: `while (!aborted) {
   await harness.setState({ status: "waiting" });
@@ -483,16 +544,47 @@ await harness.sendMessage({ content: "..." });`,
     id: "reliability",
     title: "What makes harnesses production-ready",
     section: "future",
-    component: "NarrativeSlide",
+    component: "GridSlide",
     props: {
       subtitle: "The boring parts are where harnesses earn their keep",
-      bullets: [
-        "Token budgets — stop at 90%, warn at 70%, detect diminishing returns",
-        "Error classification — rate-limit / context overflow / provider down → retry with backoff",
-        "Multi-tenant isolation — middleware filters every RAG query by tenant ID",
-        "Multi-provider routing — same agent code, choose model per request",
-        "Observability — every tool call traced to Langfuse with tenant context",
-        "This is the 80% you don't see in the demo",
+      columns: 3,
+      items: [
+        {
+          icon: "DollarSign",
+          title: "Token budgets",
+          description: "Stop at 90%, warn at 70%, detect diminishing returns",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "AlertTriangle",
+          title: "Error classification",
+          description: "Rate-limit / overflow / provider down → retry with backoff",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Building2",
+          title: "Multi-tenant",
+          description: "Middleware filters every RAG query by tenant ID",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Network",
+          title: "Multi-provider",
+          description: "Same agent code, choose model per request",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Eye",
+          title: "Observability",
+          description: "Every tool call traced with tenant context",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Sparkles",
+          title: "The 80% you don't see",
+          description: "Where harnesses earn their keep in production",
+          color: "#8b5cf6",
+        },
       ],
     },
   },
@@ -510,43 +602,92 @@ await harness.sendMessage({ content: "..." });`,
     id: "death-of-menus",
     title: "The death of menus",
     section: "future",
-    component: "NarrativeSlide",
+    component: "ComparisonSlide",
     props: {
-      subtitle: "Old UI: navigate to what you need. New UI: describe it.",
-      bullets: [
-        "Menus, forms, dropdowns — built so users can find features",
-        "Agents capture intent directly — no navigation tax",
-        "Rich UI rendered inline as the agent acts",
-        "\"Saves clicks\" isn't a metric. It's the entire premise.",
-      ],
+      subtitle: "How we used to ship software vs. how we ship it now",
+      left: {
+        label: "Yesterday",
+        title: "Navigate to find features",
+        bullets: [
+          "Menus, forms, dropdowns",
+          "Users learn the UI",
+          "Click. Click. Click.",
+          "Features hidden in submenus",
+        ],
+        icon: "Layers",
+        color: "#a1a1aa",
+      },
+      right: {
+        label: "Today",
+        title: "Describe what you want",
+        bullets: [
+          "One input. Captures intent.",
+          "Agent picks the right tools",
+          "Rich UI rendered inline",
+          "\"Saves clicks\" is the entire premise",
+        ],
+        icon: "Sparkles",
+        color: "#6366f1",
+      },
     },
   },
   {
-    id: "intent-first-quote",
-    title: "Intent first",
+    id: "intent-first-callout",
+    title: "",
     section: "future",
-    component: "QuoteSlide",
+    component: "CalloutSlide",
     props: {
-      quote:
-        "The user describes what they want. The harness figures out how to do it. The UI is what the harness chooses to show.",
-      author: "The shift",
-      accent: "#a464ff",
+      title: "Intent first",
+      callout: "The user describes what they want. The harness figures out how. The UI is what the harness chooses to show.",
+      icon: "Sparkles",
+      kind: "insight",
     },
   },
   {
     id: "your-harness",
     title: "Your harness, today",
     section: "future",
-    component: "NarrativeSlide",
+    component: "GridSlide",
     props: {
       subtitle: "Pick a domain. Build the harness. Ship it.",
-      bullets: [
-        "Coding → Claude Code, Cursor, Windsurf, mastracode",
-        "Recruiting → Ernest (Gojob hackathon), our In-App Agent",
-        "Trip planning → trip designer harness",
-        "Customer support → support harness",
-        "Sales → sales harness",
-        "What's yours?",
+      columns: 3,
+      items: [
+        {
+          icon: "Code2",
+          title: "Coding",
+          description: "Claude Code, Cursor, Windsurf, mastracode",
+          color: "#6366f1",
+        },
+        {
+          icon: "UserPlus",
+          title: "Recruiting",
+          description: "Ernest (Gojob hackathon), our In-App Agent",
+          color: "#ec4899",
+        },
+        {
+          icon: "MapPin",
+          title: "Trip planning",
+          description: "Trip designer harness",
+          color: "#10b981",
+        },
+        {
+          icon: "Headphones",
+          title: "Customer support",
+          description: "Support harness with full ticket context",
+          color: "#f59e0b",
+        },
+        {
+          icon: "TrendingUp",
+          title: "Sales",
+          description: "Sales harness — from lead to close",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "HelpCircle",
+          title: "What's yours?",
+          description: "Every domain that has a product can have a harness",
+          color: "#6366f1",
+        },
       ],
     },
   },

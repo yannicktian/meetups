@@ -15,7 +15,7 @@ export function MiniCodeBlock({ code, lang = "typescript", caption }: Props) {
   useEffect(() => {
     codeToHtml(code, {
       lang,
-      theme: "vitesse-dark",
+      theme: "github-light",
     }).then(setHtml);
   }, [code, lang]);
 
@@ -26,7 +26,7 @@ export function MiniCodeBlock({ code, lang = "typescript", caption }: Props) {
           {caption}
         </span>
       )}
-      <div className="rounded-lg overflow-hidden border border-[var(--bg-surface-hover)] bg-[var(--bg-surface)]">
+      <div className="rounded-xl overflow-hidden border border-[var(--border)] bg-white shadow-sm">
         {html ? (
           <div
             className="text-[11px] md:text-xs leading-relaxed [&_pre]:!p-4 [&_pre]:!m-0 [&_pre]:!bg-transparent [&_pre]:overflow-x-auto"

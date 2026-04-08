@@ -7,6 +7,9 @@ import { CodeSlide } from "@/components/slides/code-slide";
 import { ArchitectureSlide } from "@/components/slides/architecture-slide";
 import { InteractiveSlide } from "@/components/slides/interactive-slide";
 import { QuoteSlide } from "@/components/slides/quote-slide";
+import { GridSlide } from "@/components/slides/grid-slide";
+import { CalloutSlide } from "@/components/slides/callout-slide";
+import { ComparisonSlide } from "@/components/slides/comparison-slide";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const registry: Record<string, ComponentType<any>> = {
@@ -18,4 +21,7 @@ export const registry: Record<string, ComponentType<any>> = {
   ArchitectureSlide,
   InteractiveSlide,
   QuoteSlide,
+  GridSlide,
+  CalloutSlide,
+  ComparisonSlide,
 };

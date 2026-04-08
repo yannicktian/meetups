@@ -33,7 +33,7 @@ export function SlidesDeck({ slides }: Props) {
       </main>
 
       {/* Progress bar */}
-      <div className="fixed bottom-0 left-0 right-0 h-1 bg-[var(--bg-surface)] z-50">
+      <div className="fixed bottom-0 left-0 right-0 h-1 bg-[var(--bg-surface-alt)] z-50">
         <div
           className="h-full bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] transition-all duration-300"
           style={{ width: `${((currentIndex + 1) / total) * 100}%` }}
@@ -41,7 +41,7 @@ export function SlidesDeck({ slides }: Props) {
       </div>
 
       {/* Slide counter */}
-      <div className="fixed bottom-4 right-4 text-xs text-[var(--text-muted)] font-mono z-50">
+      <div className="fixed bottom-4 right-6 text-xs text-[var(--text-muted)] font-mono z-50 bg-white/80 backdrop-blur px-2 py-1 rounded-md border border-[var(--border)]">
         {currentIndex + 1} / {total}
       </div>
     </>

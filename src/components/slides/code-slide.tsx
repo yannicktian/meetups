@@ -19,7 +19,7 @@ export function CodeSlide({ title, code, lang = "typescript", steps }: Props) {
   useEffect(() => {
     codeToHtml(code, {
       lang,
-      theme: "vitesse-dark",
+      theme: "github-light",
     }).then(setHtml);
   }, [code, lang]);
 
@@ -70,7 +70,7 @@ export function CodeSlide({ title, code, lang = "typescript", steps }: Props) {
       </div>
 
       <motion.div
-        className="relative rounded-xl overflow-hidden border border-[var(--bg-surface-hover)]"
+        className="relative rounded-xl overflow-hidden border border-[var(--border)] bg-white shadow-sm"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -93,15 +93,13 @@ export function CodeSlide({ title, code, lang = "typescript", steps }: Props) {
         {/* Code with line dimming via CSS */}
         {html ? (
           <div
-            className="text-sm md:text-base [&_pre]:!p-6 [&_pre]:!bg-[var(--bg-surface)] [&_.line]:transition-opacity [&_.line]:duration-300 code-slide-container"
+            className="text-sm md:text-base [&_pre]:!p-6 [&_pre]:!bg-transparent [&_.line]:transition-opacity [&_.line]:duration-300 code-slide-container"
             data-active-start={currentStep?.range[0]}
             data-active-end={currentStep?.range[1]}
             dangerouslySetInnerHTML={{ __html: highlightLines(html, currentStep) }}
           />
         ) : (
-          <pre className="p-6 bg-[var(--bg-surface)] text-[var(--text-muted)] text-sm">
-            {code}
-          </pre>
+          <pre className="p-6 text-[var(--text-muted)] text-sm">{code}</pre>
         )}
       </motion.div>
     </div>
