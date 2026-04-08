@@ -43,16 +43,15 @@ export function NarrativeSlide({
   const isLarge = size === "large";
 
   const titleClass = isLarge
-    ? "text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--text-primary)] leading-tight"
+    ? "text-3xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)] leading-tight"
     : "text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] leading-tight";
 
-  const subtitleClass = isLarge
-    ? "text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)] font-light"
-    : "text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]";
+  // Subtitle and bullets share one size scale now — only title scales with `size`.
+  const subtitleClass = `text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]${
+    isLarge ? " font-light" : ""
+  }`;
 
-  const bulletTextClass = isLarge
-    ? "text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)]"
-    : "text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]";
+  const bulletTextClass = "text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]";
 
   const iconBoxClass = isLarge
     ? "flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--accent-soft)] flex items-center justify-center mt-0.5"
@@ -116,9 +115,7 @@ export function NarrativeSlide({
                           </div>
                         )}
                         <span
-                          className={`flex-1 font-bold text-[var(--text-primary)] ${
-                            isLarge ? "text-2xl md:text-3xl lg:text-4xl" : "text-xl md:text-2xl lg:text-3xl"
-                          } leading-snug`}
+                          className="flex-1 font-bold text-[var(--text-primary)] text-xl md:text-2xl lg:text-3xl leading-snug"
                         >
                           {text}
                         </span>
