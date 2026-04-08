@@ -43,8 +43,10 @@ function SlidesDeckInner({ slides }: Props) {
               <Component
                 {...slide.props}
                 title={slide.title}
-                subtitle={slide.subtitle}
                 slideId={slide.id}
+                {...(slide.subtitle !== undefined
+                  ? { subtitle: slide.subtitle }
+                  : {})}
               />
             </SlideWrapper>
           );

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
 import type { SmsMessage } from "@/lib/types";
+import { useInView } from "@/lib/use-in-view";
 
 type Props = {
   messages: SmsMessage[];
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export function SmsConversation({ messages, autoPlay = true }: Props) {
+  const { ref, isInView } = useInView(0.3);
   const [visibleCount, setVisibleCount] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
 
@@ -26,20 +28,38 @@ export function SmsConversation({ messages, autoPlay = true }: Props) {
     }, nextMessage.delay);
   }, [visibleCount, messages]);
 
+  // Reset when the slide scrolls out of view so it replays on re-entry
   useEffect(() => {
-    if (autoPlay && visibleCount < messages.length) {
-      const timer = setTimeout(playNext, visibleCount === 0 ? 500 : 300);
-      return () => clearTimeout(timer);
+    if (!isInView) {
+      setVisibleCount(0);
+      setIsTyping(false);
     }
-  }, [autoPlay, visibleCount, messages.length, playNext]);
+  }, [isInView]);
+
+  // Drive the conversation only while in view
+  useEffect(() => {
+    if (!isInView || !autoPlay) return;
+    if (visibleCount >= messages.length) return;
+
+    const timer = setTimeout(playNext, visibleCount === 0 ? 500 : 300);
+    return () => clearTimeout(timer);
+  }, [isInView, autoPlay, visibleCount, messages.length, playNext]);
 
   const replay = () => {
     setVisibleCount(0);
     setIsTyping(false);
   };
 
+  const nextSender =
+    isTyping && visibleCount < messages.length
+      ? messages[visibleCount].sender
+      : null;
+
   return (
-    <div className="w-full max-w-sm mx-auto">
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className="w-full max-w-sm md:max-w-md mx-auto"
+    >
       {/* Phone frame */}
       <div className="bg-white rounded-[2rem] p-2 shadow-2xl border border-[var(--border)]">
         {/* Status bar */}
@@ -61,7 +81,7 @@ export function SmsConversation({ messages, autoPlay = true }: Props) {
         </div>
 
         {/* Messages */}
-        <div className="h-80 overflow-y-auto px-3 py-4 flex flex-col gap-2 bg-[var(--bg-surface-alt)]">
+        <div className="h-80 md:h-[34rem] lg:h-[38rem] overflow-y-auto px-3 py-4 flex flex-col gap-2 bg-[var(--bg-surface-alt)]">
           <AnimatePresence mode="popLayout">
             {messages.slice(0, visibleCount).map((msg, i) => (
               <motion.div
@@ -84,18 +104,28 @@ export function SmsConversation({ messages, autoPlay = true }: Props) {
             ))}
           </AnimatePresence>
 
-          {/* Typing indicator */}
-          {isTyping && (
+          {/* Typing indicator — positioned on the side of the upcoming sender */}
+          {nextSender && (
             <motion.div
-              className="flex justify-start"
+              className={`flex ${nextSender === "candidate" ? "justify-end" : "justify-start"}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <div className="bg-white border border-[var(--border)] px-4 py-2.5 rounded-2xl rounded-bl-md flex gap-1 shadow-sm">
+              <div
+                className={`px-4 py-2.5 rounded-2xl flex gap-1 shadow-sm ${
+                  nextSender === "candidate"
+                    ? "bg-[var(--accent)] rounded-br-md"
+                    : "bg-white border border-[var(--border)] rounded-bl-md"
+                }`}
+              >
                 {[0, 1, 2].map((i) => (
                   <motion.span
                     key={i}
-                    className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)]"
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      nextSender === "candidate"
+                        ? "bg-white/75"
+                        : "bg-[var(--text-muted)]"
+                    }`}
                     animate={{ y: [0, -4, 0] }}
                     transition={{
                       repeat: Infinity,

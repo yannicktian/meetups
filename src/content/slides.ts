@@ -181,7 +181,7 @@ export const slides: Slide[] = [
   {
     id: "alpha-transition",
     title: "Alpha",
-    subtitle: "Where it all started",
+    subtitle: "The recruiter AI assistant",
     section: "alpha",
     component: "TransitionSlide",
     props: { color: "#10b981" },
@@ -192,18 +192,19 @@ export const slides: Slide[] = [
     section: "alpha",
     component: "NarrativeSlide",
     props: {
-      subtitle: "AI-powered temp work marketplace",
+      subtitle: "HR tech — staffing temp workers instantly, with care",
       bullets: [
         {
           text: "Thousands of job postings, millions of candidates",
           icon: "Users",
         },
         {
-          text: "Recruiters drowning in screening calls before the best candidates apply",
+          text: "35 screening calls per contract — recruiters drowning before the best candidates apply",
           icon: "AlertTriangle",
+          highlight: true,
         },
         {
-          text: "We started shipping AI to fix this in 2023",
+          text: "We started shipping AI to automate this in 2023",
           icon: "Sparkles",
         },
       ],
@@ -215,19 +216,19 @@ export const slides: Slide[] = [
     section: "alpha",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Our recruiter assistant — prequalifies candidates via SMS",
+      subtitle: "Prequalifying candidates automatically via SMS",
       bullets: [
         {
           text: "Validates job posting prerequisites in a natural conversation",
           icon: "MessageSquare",
         },
         {
-          text: "Recruiters only see candidates who pass the must-haves",
+          text: "Recruiters see the results of every qualification",
           icon: "CheckCircle2",
         },
         {
-          text: "Started internal. Worked too well to keep to ourselves.",
-          icon: "TrendingUp",
+          text: "Recruiters supervise their AI assistants",
+          icon: "Eye",
         },
       ],
     },
@@ -290,24 +291,11 @@ export const slides: Slide[] = [
     component: "StatsSlide",
     props: {
       stats: [
-        { value: 3000000, label: "Conversations" },
-        { value: 80, suffix: "%", label: "Automation rate" },
-        { value: 24, suffix: "/7", label: "Availability" },
+        { value: 3_000_000, label: "Conversations" },
+        { value: 10_000_000, label: "SMS sent" },
+        { value: 500_000, label: "Prevalidated workers" },
+        { value: 7, from: 35, label: "Screening calls per hire" },
       ],
-    },
-  },
-  {
-    id: "alpha-lesson",
-    section: "alpha",
-    title: "",
-    component: "CalloutSlide",
-    props: {
-      title: "The 80/20 lesson",
-      callout:
-        "Building the AI was the easy 80%. Operating it was the other 80%.",
-      attribution: "Trust takes infrastructure, not just a good prompt",
-      icon: "Lightbulb",
-      kind: "warning",
     },
   },
 
@@ -899,6 +887,20 @@ await harness.sendMessage({ content: "..." });`,
 }`,
       codeLang: "typescript",
       codeCaption: "harness pattern: multi-round loop",
+    },
+  },
+  {
+    id: "operating-complexity",
+    section: "pattern",
+    title: "",
+    component: "CalloutSlide",
+    props: {
+      title: "The real complexity",
+      callout:
+        "Building agents isn't the hard part anymore. Operating them in production is.",
+      attribution: "This is where harnesses earn their keep",
+      icon: "Lightbulb",
+      kind: "insight",
     },
   },
   {

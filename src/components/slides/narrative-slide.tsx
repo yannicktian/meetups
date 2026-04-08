@@ -102,9 +102,9 @@ export function NarrativeSlide({
     : "text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] leading-tight";
 
   // Subtitle and bullets share one size scale now — only title scales with `size`.
-  const subtitleClass = `text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]${
-    isLarge ? " font-light" : ""
-  }`;
+  // Accent color + left bar distinguishes the subtitle from bullet text.
+  const subtitleClass =
+    "text-lg md:text-xl lg:text-2xl text-[var(--accent)] font-semibold tracking-tight border-l-[3px] border-[var(--accent)] pl-4 md:pl-5";
 
   const bulletTextClass = "text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]";
 
