@@ -10,6 +10,8 @@ type Bullet = string | { text: string; icon?: string; highlight?: boolean };
 
 type Size = "default" | "large";
 
+type TagsVariant = "muted" | "accent";
+
 type Props = {
   title: string;
   subtitle?: string;
@@ -20,6 +22,8 @@ type Props = {
   codeLang?: string;
   codeCaption?: string;
   size?: Size;
+  tags?: string[];
+  tagsVariant?: TagsVariant;
 };
 
 export function NarrativeSlide({
@@ -32,6 +36,8 @@ export function NarrativeSlide({
   codeLang,
   codeCaption,
   size = "default",
+  tags,
+  tagsVariant = "muted",
 }: Props) {
   const hasVisual = !!children || !!code;
   const isLarge = size === "large";
@@ -145,6 +151,34 @@ export function NarrativeSlide({
               );
             })}
           </ul>
+        )}
+        {tags && tags.length > 0 && (
+          <motion.div
+            className={`flex flex-wrap gap-2 mt-5 ${
+              tagsVariant === "accent" ? "gap-3" : ""
+            }`}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT}
+            transition={{ delay: 0.5 }}
+          >
+            {tags.map((tag, i) => (
+              <motion.span
+                key={tag}
+                className={
+                  tagsVariant === "accent"
+                    ? "inline-flex items-center px-3 py-1.5 rounded-full border border-[var(--accent)] bg-[var(--accent-soft)] text-sm md:text-base font-medium text-[var(--accent)]"
+                    : "inline-flex items-center px-2.5 py-1 rounded-md bg-[var(--bg-surface-alt)] text-xs md:text-sm text-[var(--text-muted)] font-mono"
+                }
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={VIEWPORT}
+                transition={{ delay: 0.55 + i * 0.04, duration: 0.3 }}
+              >
+                {tag}
+              </motion.span>
+            ))}
+          </motion.div>
         )}
       </div>
 
