@@ -12,7 +12,7 @@ type Props = {
 
 export function TransitionSlide({ title, subtitle, color }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center text-center gap-6">
+    <div className="flex flex-col items-center justify-center text-center gap-5 md:gap-7">
       <motion.div
         className="w-24 h-1.5 rounded-full mb-2"
         style={{ background: color || "var(--accent)" }}
@@ -22,7 +22,7 @@ export function TransitionSlide({ title, subtitle, color }: Props) {
         transition={{ duration: 0.6, ease: "easeOut" }}
       />
       <motion.h2
-        className="text-5xl md:text-7xl font-bold text-[var(--text-primary)] leading-tight"
+        className="text-5xl md:text-7xl lg:text-8xl font-bold text-[var(--text-primary)] leading-tight"
         initial={{ opacity: 0, scale: 0.92 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={VIEWPORT}
@@ -32,7 +32,7 @@ export function TransitionSlide({ title, subtitle, color }: Props) {
       </motion.h2>
       {subtitle && (
         <motion.p
-          className="text-xl md:text-2xl text-[var(--text-secondary)] font-light max-w-2xl"
+          className="text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)] font-light max-w-2xl"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={VIEWPORT}

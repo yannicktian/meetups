@@ -72,10 +72,12 @@ body {
 }
 
 /* Hide scrollbar on the slides deck container */
-.slides-deck-container::-webkit-scrollbar {
+.slides-deck-container::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-.slides-deck-container {
+.slides-deck-container,
+.scrollbar-hide {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }

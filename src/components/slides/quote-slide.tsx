@@ -15,9 +15,9 @@ export function QuoteSlide({ quote, author, source, accent }: Props) {
   const accentColor = accent || "var(--accent)";
 
   return (
-    <div className="flex flex-col items-center justify-center text-center gap-8 max-w-4xl mx-auto">
+    <div className="flex flex-col items-center justify-center text-center gap-6 md:gap-8 max-w-4xl mx-auto">
       <motion.div
-        className="text-8xl md:text-[12rem] leading-none font-serif"
+        className="text-8xl md:text-[10rem] lg:text-[12rem] leading-none font-serif"
         style={{ color: accentColor, opacity: 0.2 }}
         initial={{ opacity: 0, scale: 0.5 }}
         whileInView={{ opacity: 0.2, scale: 1 }}
@@ -28,7 +28,7 @@ export function QuoteSlide({ quote, author, source, accent }: Props) {
       </motion.div>
 
       <motion.blockquote
-        className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight text-[var(--text-primary)] -mt-8 md:-mt-16"
+        className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight text-[var(--text-primary)] -mt-6 md:-mt-12 lg:-mt-16"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={VIEWPORT}
@@ -44,11 +44,13 @@ export function QuoteSlide({ quote, author, source, accent }: Props) {
         viewport={VIEWPORT}
         transition={{ delay: 0.5 }}
       >
-        <span className="text-base md:text-lg font-bold" style={{ color: accentColor }}>
+        <span className="text-lg md:text-xl font-bold" style={{ color: accentColor }}>
           — {author}
         </span>
         {source && (
-          <span className="text-sm text-[var(--text-muted)] font-mono">{source}</span>
+          <span className="text-sm md:text-base text-[var(--text-muted)] font-mono">
+            {source}
+          </span>
         )}
       </motion.div>
     </div>

@@ -46,10 +46,10 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix?: string }) 
 
 export function StatsSlide({ title, stats }: Props) {
   return (
-    <div className="flex flex-col items-center gap-12">
+    <div className="flex flex-col items-center gap-8 md:gap-12">
       {title && (
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center"
+          className="text-3xl md:text-5xl font-bold text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={VIEWPORT}
@@ -57,7 +57,7 @@ export function StatsSlide({ title, stats }: Props) {
           {title}
         </motion.h2>
       )}
-      <div className="flex flex-wrap justify-center gap-16">
+      <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-10 md:gap-16">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -67,10 +67,10 @@ export function StatsSlide({ title, stats }: Props) {
             viewport={VIEWPORT}
             transition={{ delay: 0.2 + i * 0.15 }}
           >
-            <span className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
+            <span className="text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
               <AnimatedCounter value={stat.value} suffix={stat.suffix} />
             </span>
-            <span className="text-sm md:text-base text-[var(--text-secondary)] uppercase tracking-wider">
+            <span className="text-base md:text-lg lg:text-xl text-[var(--text-secondary)] uppercase tracking-wider font-medium">
               {stat.label}
             </span>
           </motion.div>

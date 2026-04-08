@@ -50,20 +50,20 @@ export function PrerequisiteSetup({
   }, [prerequisites, autoPlay]);
 
   return (
-    <div className="flex gap-6 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full max-w-4xl mx-auto">
       {/* Job posting card */}
-      <div className="flex-shrink-0 w-64">
+      <div className="w-full md:flex-shrink-0 md:w-64">
         <div className="bg-white rounded-xl p-5 border border-[var(--border)] shadow-sm">
           <div className="flex items-center gap-2 mb-3">
-            <FileText className="w-3.5 h-3.5 text-[var(--text-muted)]" />
-            <span className="text-[10px] text-[var(--text-muted)] font-mono uppercase tracking-wider font-semibold">
+            <FileText className="w-4 h-4 text-[var(--text-muted)]" />
+            <span className="text-xs text-[var(--text-muted)] font-mono uppercase tracking-wider font-semibold">
               Job Posting
             </span>
           </div>
-          <h3 className="text-lg font-bold text-[var(--text-primary)] leading-tight">
+          <h3 className="text-xl md:text-2xl font-bold text-[var(--text-primary)] leading-tight">
             {jobTitle}
           </h3>
-          <p className="text-sm text-[var(--text-secondary)] mt-1">{jobCompany}</p>
+          <p className="text-base text-[var(--text-secondary)] mt-1">{jobCompany}</p>
           <div className="mt-4 flex flex-col gap-2">
             <div className="h-2 bg-[var(--bg-surface-alt)] rounded-full w-full" />
             <div className="h-2 bg-[var(--bg-surface-alt)] rounded-full w-3/4" />
@@ -74,9 +74,9 @@ export function PrerequisiteSetup({
       </div>
 
       {/* Prerequisites list */}
-      <div className="flex-1 flex flex-col gap-3 min-w-0">
+      <div className="flex-1 flex flex-col gap-3 min-w-0 w-full">
         <div className="flex items-center gap-3 mb-1">
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">Prerequisites</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-[var(--text-primary)]">Prerequisites</h3>
           {isStreaming && (
             <motion.div
               className="flex gap-2 items-center bg-[var(--accent-soft)] px-2.5 py-1 rounded-full"
@@ -91,7 +91,12 @@ export function PrerequisiteSetup({
           )}
         </div>
 
-        <Reorder.Group axis="y" values={items} onReorder={setItems} className="flex flex-col gap-2">
+        <Reorder.Group
+          axis="y"
+          values={items}
+          onReorder={setItems}
+          className="flex flex-col gap-2"
+        >
           <AnimatePresence mode="popLayout">
             {items.slice(0, visibleCount).map((prereq) => (
               <Reorder.Item
@@ -104,14 +109,14 @@ export function PrerequisiteSetup({
                 className="bg-white rounded-lg p-4 border border-[var(--border)] shadow-sm cursor-grab active:cursor-grabbing hover:border-[var(--accent)] transition-colors group"
               >
                 <div className="flex items-start gap-3">
-                  <GripVertical className="w-4 h-4 text-[var(--text-muted)] mt-0.5 flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity" />
+                  <GripVertical className="w-4 h-4 text-[var(--text-muted)] mt-1 flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-semibold text-[var(--text-primary)]">
+                      <span className="font-semibold text-base md:text-lg text-[var(--text-primary)]">
                         {prereq.label}
                       </span>
                       <span
-                        className={`text-[9px] font-mono uppercase px-1.5 py-0.5 rounded font-bold tracking-wider ${
+                        className={`text-[10px] md:text-xs font-mono uppercase px-1.5 py-0.5 rounded font-bold tracking-wider ${
                           prereq.type === "eliminatory"
                             ? "bg-red-100 text-red-700"
                             : "bg-amber-100 text-amber-700"
@@ -120,7 +125,7 @@ export function PrerequisiteSetup({
                         {prereq.type}
                       </span>
                     </div>
-                    <p className="text-sm text-[var(--text-secondary)] mt-1">
+                    <p className="text-sm md:text-base text-[var(--text-secondary)] mt-1">
                       {prereq.description}
                     </p>
                   </div>

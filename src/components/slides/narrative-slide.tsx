@@ -38,28 +38,30 @@ export function NarrativeSlide({
 
   const titleClass = isLarge
     ? "text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--text-primary)] leading-tight"
-    : "text-3xl md:text-5xl font-bold text-[var(--text-primary)] leading-tight";
+    : "text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] leading-tight";
 
   const subtitleClass = isLarge
-    ? "text-2xl md:text-3xl text-[var(--text-secondary)] font-light"
-    : "text-lg md:text-xl text-[var(--text-secondary)]";
+    ? "text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)] font-light"
+    : "text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]";
 
   const bulletTextClass = isLarge
-    ? "text-xl md:text-2xl text-[var(--text-secondary)]"
-    : "text-base md:text-lg text-[var(--text-secondary)]";
+    ? "text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)]"
+    : "text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]";
 
   const iconBoxClass = isLarge
-    ? "flex-shrink-0 w-9 h-9 rounded-lg bg-[var(--accent-soft)] flex items-center justify-center mt-0.5"
-    : "flex-shrink-0 w-6 h-6 rounded-md bg-[var(--accent-soft)] flex items-center justify-center mt-0.5";
+    ? "flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--accent-soft)] flex items-center justify-center mt-0.5"
+    : "flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--accent-soft)] flex items-center justify-center mt-0.5";
 
-  const iconClass = isLarge ? "w-5 h-5 text-[var(--accent)]" : "w-3.5 h-3.5 text-[var(--accent)]";
+  const iconClass = isLarge
+    ? "w-5 h-5 text-[var(--accent)]"
+    : "w-4 h-4 text-[var(--accent)]";
 
   return (
     <div
-      className={`flex flex-col ${hasVisual ? "md:flex-row" : ""} items-center gap-12 ${reversed ? "md:flex-row-reverse" : ""}`}
+      className={`flex flex-col ${hasVisual ? "md:flex-row" : ""} items-center gap-6 md:gap-10 lg:gap-12 ${reversed ? "md:flex-row-reverse" : ""}`}
     >
       {/* Text side */}
-      <div className="flex-1 flex flex-col gap-4 min-w-0">
+      <div className="flex-1 flex flex-col gap-4 min-w-0 w-full">
         <motion.h2
           className={titleClass}
           initial={{ opacity: 0, x: reversed ? 20 : -20 }}
@@ -81,7 +83,7 @@ export function NarrativeSlide({
           </motion.p>
         )}
         {bullets && (
-          <ul className={`flex flex-col ${isLarge ? "gap-5" : "gap-3"} mt-3`}>
+          <ul className={`flex flex-col ${isLarge ? "gap-5" : "gap-4"} mt-3`}>
             {bullets.map((bullet, i) => {
               const isObject = typeof bullet === "object";
               const text = isObject ? bullet.text : bullet;
@@ -103,13 +105,13 @@ export function NarrativeSlide({
                     >
                       <div className="flex items-start gap-4">
                         {Icon && (
-                          <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--accent)] flex items-center justify-center shadow-sm">
-                            <Icon className="w-5 h-5 text-white" strokeWidth={2.75} />
+                          <div className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-xl bg-[var(--accent)] flex items-center justify-center shadow-sm">
+                            <Icon className="w-6 h-6 md:w-7 md:h-7 text-white" strokeWidth={2.75} />
                           </div>
                         )}
                         <span
                           className={`flex-1 font-bold text-[var(--text-primary)] ${
-                            isLarge ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"
+                            isLarge ? "text-2xl md:text-3xl lg:text-4xl" : "text-xl md:text-2xl lg:text-3xl"
                           } leading-snug`}
                         >
                           {text}
@@ -123,7 +125,7 @@ export function NarrativeSlide({
               return (
                 <motion.li
                   key={i}
-                  className={`${bulletTextClass} flex items-start gap-3`}
+                  className={`${bulletTextClass} flex items-start gap-3 md:gap-4`}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={VIEWPORT}

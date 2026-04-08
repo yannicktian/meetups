@@ -35,10 +35,10 @@ export function CalloutSlide({
   const style = KIND_STYLES[kind];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 max-w-4xl mx-auto text-center">
+    <div className="flex flex-col items-center justify-center gap-6 md:gap-8 max-w-4xl mx-auto text-center">
       {title && (
         <motion.h2
-          className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]"
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-[var(--text-primary)]"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
@@ -48,7 +48,7 @@ export function CalloutSlide({
       )}
       {subtitle && (
         <motion.p
-          className="text-lg md:text-xl text-[var(--text-secondary)] -mt-4"
+          className="text-xl md:text-2xl text-[var(--text-secondary)] -mt-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={VIEWPORT}
@@ -59,7 +59,7 @@ export function CalloutSlide({
       )}
 
       <motion.div
-        className="relative w-full rounded-2xl p-8 md:p-10 border-2 shadow-lg"
+        className="relative w-full rounded-2xl p-8 md:p-12 border-2 shadow-lg"
         style={{
           background: style.bg,
           borderColor: style.border,
@@ -71,24 +71,24 @@ export function CalloutSlide({
       >
         {Icon && (
           <div
-            className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center shadow-md border-2"
+            className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full flex items-center justify-center shadow-md border-2"
             style={{
               background: "white",
               borderColor: style.border,
               color: style.iconColor,
             }}
           >
-            <Icon className="w-6 h-6" strokeWidth={2.5} />
+            <Icon className="w-7 h-7" strokeWidth={2.5} />
           </div>
         )}
 
-        <p className="text-2xl md:text-4xl font-bold leading-tight text-[var(--text-primary)] mt-2">
+        <p className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight text-[var(--text-primary)] mt-2">
           {callout}
         </p>
 
         {attribution && (
           <p
-            className="mt-4 text-sm md:text-base font-mono uppercase tracking-wider"
+            className="mt-5 text-base md:text-lg font-mono uppercase tracking-wider"
             style={{ color: style.iconColor }}
           >
             — {attribution}

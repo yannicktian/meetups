@@ -31,12 +31,12 @@ export function InteractiveSlide({
   const Component = interactiveRegistry[interactiveComponent];
 
   return (
-    <div className={`flex flex-col gap-8 w-full ${layout === "centered" ? "items-center" : ""}`}>
+    <div className={`flex flex-col gap-6 md:gap-8 w-full ${layout === "centered" ? "items-center" : ""}`}>
       {(title || subtitle) && (
         <div className={layout === "centered" ? "text-center" : ""}>
           {title && (
             <motion.h2
-              className="text-3xl md:text-4xl font-bold"
+              className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={VIEWPORT}
@@ -46,7 +46,7 @@ export function InteractiveSlide({
           )}
           {subtitle && (
             <motion.p
-              className="text-lg text-[var(--text-secondary)] mt-2"
+              className="text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)] mt-3"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={VIEWPORT}

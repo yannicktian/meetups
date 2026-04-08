@@ -97,13 +97,13 @@ export function CodeSlide({ title, code, lang = "typescript", steps }: Props) {
         {/* Code with line dimming via CSS */}
         {html ? (
           <div
-            className="text-sm md:text-base [&_pre]:!p-6 [&_pre]:!bg-transparent [&_.line]:transition-opacity [&_.line]:duration-300 code-slide-container"
+            className="text-base md:text-lg [&_pre]:!p-5 md:[&_pre]:!p-6 [&_pre]:!bg-transparent [&_pre]:overflow-x-auto [&_.line]:transition-opacity [&_.line]:duration-300 code-slide-container"
             data-active-start={currentStep?.range[0]}
             data-active-end={currentStep?.range[1]}
             dangerouslySetInnerHTML={{ __html: highlightLines(html, currentStep) }}
           />
         ) : (
-          <pre className="p-6 text-[var(--text-muted)] text-sm">{code}</pre>
+          <pre className="p-6 text-[var(--text-muted)] text-base overflow-x-auto">{code}</pre>
         )}
       </motion.div>
     </div>

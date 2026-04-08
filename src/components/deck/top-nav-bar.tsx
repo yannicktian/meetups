@@ -11,10 +11,10 @@ type Props = {
 export function TopNavBar({ currentSection, onSectionClickAction }: Props) {
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--border)]"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-[var(--border)]"
       style={{ height: "var(--nav-height)" }}
     >
-      <div className="h-full max-w-6xl mx-auto px-4 md:px-8 flex items-center justify-between gap-4">
+      <div className="h-full w-full max-w-6xl mx-auto px-3 md:px-8 flex items-center justify-between gap-2 md:gap-4">
         {/* Brand / talk title */}
         <div className="flex items-center gap-2 flex-shrink-0">
           <div
@@ -25,13 +25,13 @@ export function TopNavBar({ currentSection, onSectionClickAction }: Props) {
                 : "var(--accent)",
             }}
           />
-          <span className="text-xs md:text-sm font-mono font-semibold text-[var(--text-primary)] hidden sm:inline">
+          <span className="text-xs md:text-sm font-mono font-semibold text-[var(--text-primary)] hidden md:inline">
             Year of Harnesses
           </span>
         </div>
 
         {/* Section pills */}
-        <div className="flex items-center gap-1 md:gap-1.5 flex-1 justify-center overflow-x-auto">
+        <div className="flex items-center gap-1 md:gap-1.5 flex-1 justify-center md:justify-center overflow-x-auto scrollbar-hide">
           {SECTIONS.map((section) => {
             const isActive = section.id === currentSection;
             return (
@@ -41,7 +41,7 @@ export function TopNavBar({ currentSection, onSectionClickAction }: Props) {
                   onSectionClickAction(section.id);
                   e.currentTarget.blur();
                 }}
-                className="relative px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-colors whitespace-nowrap flex-shrink-0 cursor-pointer focus:outline-none focus-visible:outline-none"
+                className="relative px-2 md:px-3.5 py-1.5 md:py-2 rounded-full text-[11px] md:text-xs font-semibold uppercase tracking-wider transition-colors whitespace-nowrap flex-shrink-0 cursor-pointer focus:outline-none focus-visible:outline-none"
                 style={{
                   color: isActive ? "white" : "var(--text-secondary)",
                 }}
@@ -61,8 +61,8 @@ export function TopNavBar({ currentSection, onSectionClickAction }: Props) {
           })}
         </div>
 
-        {/* Spacer to balance the brand on the left */}
-        <div className="flex-shrink-0 w-0 sm:w-32 hidden sm:block" />
+        {/* Spacer to balance the brand on the left (desktop only) */}
+        <div className="flex-shrink-0 w-0 md:w-32 hidden md:block" />
       </div>
     </nav>
   );
