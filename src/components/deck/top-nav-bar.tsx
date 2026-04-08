@@ -37,8 +37,11 @@ export function TopNavBar({ currentSection, onSectionClickAction }: Props) {
             return (
               <button
                 key={section.id}
-                onClick={() => onSectionClickAction(section.id)}
-                className="relative px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap flex-shrink-0 cursor-pointer hover:opacity-90"
+                onClick={(e) => {
+                  onSectionClickAction(section.id);
+                  e.currentTarget.blur();
+                }}
+                className="relative px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-xs font-semibold uppercase tracking-wider transition-colors whitespace-nowrap flex-shrink-0 cursor-pointer focus:outline-none focus-visible:outline-none"
                 style={{
                   color: isActive ? "white" : "var(--text-secondary)",
                 }}
