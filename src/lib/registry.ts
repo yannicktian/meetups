@@ -11,6 +11,7 @@ import { GridSlide } from "@/components/slides/grid-slide";
 import { CalloutSlide } from "@/components/slides/callout-slide";
 import { ComparisonSlide } from "@/components/slides/comparison-slide";
 import { AboutMeSlide } from "@/components/slides/about-me-slide";
+import { HarnessCloudSlide } from "@/components/slides/harness-cloud-slide";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const registry: Record<string, ComponentType<any>> = {
@@ -26,4 +27,5 @@ export const registry: Record<string, ComponentType<any>> = {
   CalloutSlide,
   ComparisonSlide,
   AboutMeSlide,
+  HarnessCloudSlide,
 };
