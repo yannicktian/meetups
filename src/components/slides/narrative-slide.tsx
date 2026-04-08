@@ -47,8 +47,8 @@ export function NarrativeSlide({
     : "text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] leading-tight";
 
   const subtitleClass = isLarge
-    ? "text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)] font-light"
-    : "text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)]";
+    ? "text-xl md:text-2xl lg:text-3xl text-[var(--accent)] font-semibold tracking-tight border-l-[3px] border-[var(--accent)] pl-4 md:pl-5"
+    : "text-lg md:text-xl lg:text-2xl text-[var(--accent)] font-semibold tracking-tight border-l-[3px] border-[var(--accent)] pl-4 md:pl-5";
 
   const bulletTextClass = isLarge
     ? "text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)]"
