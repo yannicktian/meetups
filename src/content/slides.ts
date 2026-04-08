@@ -53,6 +53,16 @@ export const slides: Slide[] = [
     component: "NarrativeSlide",
     props: {
       size: "large",
+    },
+  },
+  {
+    id: "hook-realization",
+    title: "",
+    section: "intro",
+    component: "NarrativeSlide",
+    props: {
+      size: "large",
+      stagedReveal: true,
       bullets: [
         {
           text: "You're not just using an AI assistant.",

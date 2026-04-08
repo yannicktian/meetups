@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { startTransition, useEffect, useState } from "react";
 import { MiniCodeBlock } from "@/components/interactive/mini-code-block";
 import { getIcon } from "@/lib/icon-map";
+import { useStageNav } from "@/lib/stage-nav-context";
+import { useInView } from "@/lib/use-in-view";
 
 const VIEWPORT = { once: false, amount: 0.3 } as const;
 
@@ -24,6 +27,12 @@ type Props = {
   size?: Size;
   tags?: string[];
   tagsVariant?: TagsVariant;
+  /** When true, only the first bullet is shown on mount; right-arrow
+   * reveals the next one (via the deck's stage-nav mechanism). Requires
+   * `slideId` to be provided by the deck for handler registration. */
+  stagedReveal?: boolean;
+  /** Injected by the deck so slides can self-register with stage nav. */
+  slideId?: string;
 };
 
 export function NarrativeSlide({
@@ -38,7 +47,53 @@ export function NarrativeSlide({
   size = "default",
   tags,
   tagsVariant = "muted",
+  stagedReveal,
+  slideId,
 }: Props) {
+  // ─── Staged reveal state ────────────────────────────────────────
+  const bulletCount = bullets?.length ?? 0;
+  const [visibleCount, setVisibleCount] = useState<number>(
+    stagedReveal ? Math.min(1, bulletCount) : bulletCount,
+  );
+  const stageNav = useStageNav();
+  const { ref: viewRef, isInView } = useInView(0.3);
+
+  // Reset to the first bullet when the slide leaves the viewport so the
+  // reveal re-fires next time it's shown.
+  useEffect(() => {
+    if (stagedReveal && !isInView) {
+      startTransition(() => setVisibleCount(Math.min(1, bulletCount)));
+    }
+  }, [stagedReveal, isInView, bulletCount]);
+
+  // Register stage interceptors so right/left arrows reveal bullets
+  // one by one before the deck advances to the next slide. Reverse
+  // symmetry supported.
+  useEffect(() => {
+    if (!stagedReveal || !stageNav || !slideId || bulletCount === 0) return;
+    stageNav.register(slideId, {
+      onNextRequest: () => {
+        if (visibleCount < bulletCount) {
+          setVisibleCount(visibleCount + 1);
+          return true; // consumed
+        }
+        return false; // let the deck advance to the next slide
+      },
+      onPrevRequest: () => {
+        if (visibleCount > 1) {
+          setVisibleCount(visibleCount - 1);
+          return true;
+        }
+        return false;
+      },
+    });
+    return () => stageNav.unregister(slideId);
+  }, [visibleCount, stageNav, slideId, stagedReveal, bulletCount]);
+
+  // When staged, only render the first N bullets; otherwise render all.
+  const visibleBullets =
+    stagedReveal && bullets ? bullets.slice(0, visibleCount) : bullets;
+
   const hasVisual = !!children || !!code;
   const isLarge = size === "large";
 
@@ -61,21 +116,29 @@ export function NarrativeSlide({
     ? "w-5 h-5 text-[var(--accent)]"
     : "w-4 h-4 text-[var(--accent)]";
 
+  // In staged mode, newly revealed bullets should pop in quickly rather
+  // than wait for the full title-first stagger.
+  const bulletDelay = (i: number) =>
+    stagedReveal ? 0.1 : 0.4 + i * 0.08;
+
   return (
     <div
+      ref={viewRef as React.RefObject<HTMLDivElement>}
       className={`flex flex-col ${hasVisual ? "md:flex-row" : ""} items-center gap-6 md:gap-10 lg:gap-12 ${reversed ? "md:flex-row-reverse" : ""}`}
     >
       {/* Text side */}
       <div className="flex-1 flex flex-col gap-4 min-w-0 w-full">
-        <motion.h2
-          className={titleClass}
-          initial={{ opacity: 0, x: reversed ? 20 : -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={VIEWPORT}
-          transition={{ delay: 0.2 }}
-        >
-          {title}
-        </motion.h2>
+        {title && (
+          <motion.h2
+            className={titleClass}
+            initial={{ opacity: 0, x: reversed ? 20 : -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={VIEWPORT}
+            transition={{ delay: 0.2 }}
+          >
+            {title}
+          </motion.h2>
+        )}
         {subtitle && (
           <motion.p
             className={subtitleClass}
@@ -87,9 +150,9 @@ export function NarrativeSlide({
             {subtitle}
           </motion.p>
         )}
-        {bullets && (
+        {visibleBullets && visibleBullets.length > 0 && (
           <ul className={`flex flex-col ${isLarge ? "gap-5" : "gap-4"} mt-3`}>
-            {bullets.map((bullet, i) => {
+            {visibleBullets.map((bullet, i) => {
               const isObject = typeof bullet === "object";
               const text = isObject ? bullet.text : bullet;
               const Icon = isObject ? getIcon(bullet.icon) : null;
@@ -103,7 +166,7 @@ export function NarrativeSlide({
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={VIEWPORT}
-                    transition={{ delay: 0.4 + i * 0.08 }}
+                    transition={{ delay: bulletDelay(i) }}
                   >
                     <div
                       className={`relative rounded-2xl border-2 border-[var(--accent)] bg-gradient-to-br from-[var(--accent-soft)] to-white p-5 md:p-6 shadow-md`}
@@ -132,7 +195,7 @@ export function NarrativeSlide({
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={VIEWPORT}
-                  transition={{ delay: 0.4 + i * 0.08 }}
+                  transition={{ delay: bulletDelay(i) }}
                 >
                   {Icon ? (
                     <div className={iconBoxClass}>

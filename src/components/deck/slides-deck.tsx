@@ -40,7 +40,12 @@ function SlidesDeckInner({ slides }: Props) {
           }
           return (
             <SlideWrapper key={slide.id} id={slide.id} section={slide.section}>
-              <Component {...slide.props} title={slide.title} subtitle={slide.subtitle} />
+              <Component
+                {...slide.props}
+                title={slide.title}
+                subtitle={slide.subtitle}
+                slideId={slide.id}
+              />
             </SlideWrapper>
           );
         })}
