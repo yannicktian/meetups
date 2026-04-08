@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { MiniCodeBlock } from "@/components/interactive/mini-code-block";
 
 type Props = {
   title: string;
@@ -8,11 +9,27 @@ type Props = {
   bullets?: string[];
   children?: React.ReactNode;
   reversed?: boolean;
+  code?: string;
+  codeLang?: string;
+  codeCaption?: string;
 };
 
-export function NarrativeSlide({ title, subtitle, bullets, children, reversed }: Props) {
+export function NarrativeSlide({
+  title,
+  subtitle,
+  bullets,
+  children,
+  reversed,
+  code,
+  codeLang,
+  codeCaption,
+}: Props) {
+  const hasVisual = !!children || !!code;
+
   return (
-    <div className={`flex flex-col md:flex-row items-center gap-12 ${reversed ? "md:flex-row-reverse" : ""}`}>
+    <div
+      className={`flex flex-col ${hasVisual ? "md:flex-row" : ""} items-center gap-12 ${reversed ? "md:flex-row-reverse" : ""}`}
+    >
       {/* Text side */}
       <div className="flex-1 flex flex-col gap-4">
         <motion.h2
@@ -51,8 +68,8 @@ export function NarrativeSlide({ title, subtitle, bullets, children, reversed }:
         )}
       </div>
 
-      {/* Visual side */}
-      {children && (
+      {/* Visual side: children OR code */}
+      {hasVisual && (
         <motion.div
           className="flex-1 w-full"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -60,6 +77,9 @@ export function NarrativeSlide({ title, subtitle, bullets, children, reversed }:
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           {children}
+          {code && !children && (
+            <MiniCodeBlock code={code} lang={codeLang} caption={codeCaption} />
+          )}
         </motion.div>
       )}
     </div>
