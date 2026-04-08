@@ -4,6 +4,8 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "@/lib/use-in-view";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type StatItem = {
   value: number;
   suffix?: string;
@@ -28,7 +30,9 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix?: string }) 
 
   useEffect(() => {
     if (isInView) {
-      animate(count, value, { duration: 1.5, ease: "easeOut" });
+      count.set(0);
+      const controls = animate(count, value, { duration: 1.5, ease: "easeOut" });
+      return controls.stop;
     }
   }, [isInView, count, value]);
 
@@ -47,7 +51,8 @@ export function StatsSlide({ title, stats }: Props) {
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT}
         >
           {title}
         </motion.h2>
@@ -58,7 +63,8 @@ export function StatsSlide({ title, stats }: Props) {
             key={stat.label}
             className="flex flex-col items-center gap-2"
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT}
             transition={{ delay: 0.2 + i * 0.15 }}
           >
             <span className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">

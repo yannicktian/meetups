@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { getIcon } from "@/lib/icon-map";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type CalloutKind = "insight" | "warning" | "success" | "info";
 
 type Props = {
@@ -38,7 +40,8 @@ export function CalloutSlide({
         <motion.h2
           className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]"
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT}
         >
           {title}
         </motion.h2>
@@ -47,7 +50,8 @@ export function CalloutSlide({
         <motion.p
           className="text-lg md:text-xl text-[var(--text-secondary)] -mt-4"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.1 }}
         >
           {subtitle}
@@ -61,7 +65,8 @@ export function CalloutSlide({
           borderColor: style.border,
         }}
         initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={VIEWPORT}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
         {Icon && (

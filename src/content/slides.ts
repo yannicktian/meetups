@@ -11,8 +11,7 @@ export const slides: Slide[] = [
     props: {
       badge: "Developer AI.xperience",
       event: {
-        name: "Developer AI.xperience night",
-        date: "April 10, 2026",
+        date: "April 9, 2026",
         location: "Marseille",
       },
       hosts: "Qalico × Gojob",

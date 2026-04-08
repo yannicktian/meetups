@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArchitectureDiagram } from "@/components/interactive/architecture-diagram";
 import type { DiagramNode, DiagramEdge, DiagramGroup } from "@/lib/types";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type Props = {
   title: string;
   subtitle?: string;
@@ -21,7 +23,8 @@ export function ArchitectureSlide({ title, subtitle, nodes, edges, groups, width
         <motion.h2
           className="text-3xl md:text-4xl font-bold"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT}
         >
           {title}
         </motion.h2>
@@ -29,7 +32,8 @@ export function ArchitectureSlide({ title, subtitle, nodes, edges, groups, width
           <motion.p
             className="text-lg text-[var(--text-secondary)] mt-2"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT}
             transition={{ delay: 0.1 }}
           >
             {subtitle}
@@ -39,7 +43,8 @@ export function ArchitectureSlide({ title, subtitle, nodes, edges, groups, width
       <motion.div
         className="w-full max-w-4xl mx-auto"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={VIEWPORT}
         transition={{ delay: 0.2 }}
       >
         <ArchitectureDiagram

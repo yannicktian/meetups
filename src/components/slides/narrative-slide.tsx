@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { MiniCodeBlock } from "@/components/interactive/mini-code-block";
 import { getIcon } from "@/lib/icon-map";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type Bullet = string | { text: string; icon?: string; highlight?: boolean };
 
 type Size = "default" | "large";
@@ -61,7 +63,8 @@ export function NarrativeSlide({
         <motion.h2
           className={titleClass}
           initial={{ opacity: 0, x: reversed ? 20 : -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.2 }}
         >
           {title}
@@ -70,14 +73,15 @@ export function NarrativeSlide({
           <motion.p
             className={subtitleClass}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT}
             transition={{ delay: 0.3 }}
           >
             {subtitle}
           </motion.p>
         )}
         {bullets && (
-          <motion.ul className={`flex flex-col ${isLarge ? "gap-5" : "gap-3"} mt-3`}>
+          <ul className={`flex flex-col ${isLarge ? "gap-5" : "gap-3"} mt-3`}>
             {bullets.map((bullet, i) => {
               const isObject = typeof bullet === "object";
               const text = isObject ? bullet.text : bullet;
@@ -90,7 +94,8 @@ export function NarrativeSlide({
                     key={i}
                     className="relative mt-2"
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={VIEWPORT}
                     transition={{ delay: 0.4 + i * 0.08 }}
                   >
                     <div
@@ -120,7 +125,8 @@ export function NarrativeSlide({
                   key={i}
                   className={`${bulletTextClass} flex items-start gap-3`}
                   initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={VIEWPORT}
                   transition={{ delay: 0.4 + i * 0.08 }}
                 >
                   {Icon ? (
@@ -136,7 +142,7 @@ export function NarrativeSlide({
                 </motion.li>
               );
             })}
-          </motion.ul>
+          </ul>
         )}
       </div>
 
@@ -145,7 +151,8 @@ export function NarrativeSlide({
         <motion.div
           className="flex-1 w-full min-w-0"
           initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           {children}

@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import type { DiagramNode, DiagramEdge, DiagramGroup } from "@/lib/types";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type Props = {
   nodes: DiagramNode[];
   edges: DiagramEdge[];
@@ -47,7 +49,8 @@ export function ArchitectureDiagram({
         <motion.g
           key={group.id}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT}
           transition={{ delay: i * 0.1 }}
         >
           <rect
@@ -95,13 +98,15 @@ export function ArchitectureDiagram({
               strokeWidth={1.75}
               strokeDasharray={edge.animated ? "6 4" : undefined}
               initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.7 }}
+              whileInView={{ pathLength: 1, opacity: 0.7 }}
+              viewport={VIEWPORT}
               transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
             />
             {edge.label && (
               <motion.g
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={VIEWPORT}
                 transition={{ delay: 0.8 + i * 0.1 }}
               >
                 {/* Label background pill */}
@@ -137,7 +142,8 @@ export function ArchitectureDiagram({
         <motion.g
           key={node.id}
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.2 + i * 0.08, type: "spring", stiffness: 200 }}
           style={{ transformOrigin: `${node.x + node.width / 2}px ${node.y + node.height / 2}px` }}
         >

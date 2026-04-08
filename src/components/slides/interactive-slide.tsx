@@ -5,6 +5,8 @@ import { SmsConversation } from "@/components/interactive/sms-conversation";
 import { PrerequisiteSetup } from "@/components/interactive/prerequisite-setup";
 import type { ComponentType } from "react";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const interactiveRegistry: Record<string, ComponentType<any>> = {
   SmsConversation,
@@ -36,7 +38,8 @@ export function InteractiveSlide({
             <motion.h2
               className="text-3xl md:text-4xl font-bold"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={VIEWPORT}
             >
               {title}
             </motion.h2>
@@ -45,7 +48,8 @@ export function InteractiveSlide({
             <motion.p
               className="text-lg text-[var(--text-secondary)] mt-2"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={VIEWPORT}
               transition={{ delay: 0.1 }}
             >
               {subtitle}
@@ -56,7 +60,8 @@ export function InteractiveSlide({
       <motion.div
         className="w-full"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VIEWPORT}
         transition={{ delay: 0.3 }}
       >
         {Component ? (

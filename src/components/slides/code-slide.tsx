@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { codeToHtml } from "shiki";
 import type { CodeStep } from "@/lib/types";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type Props = {
   title?: string;
   code: string;
@@ -52,7 +54,8 @@ export function CodeSlide({ title, code, lang = "typescript", steps }: Props) {
           <motion.h2
             className="text-2xl md:text-3xl font-bold"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT}
           >
             {title}
           </motion.h2>
@@ -72,7 +75,8 @@ export function CodeSlide({ title, code, lang = "typescript", steps }: Props) {
       <motion.div
         className="relative rounded-xl overflow-hidden border border-[var(--border)] bg-white shadow-sm"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VIEWPORT}
         transition={{ delay: 0.2 }}
       >
         {/* Step indicators */}

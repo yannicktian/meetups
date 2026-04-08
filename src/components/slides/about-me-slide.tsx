@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { getIcon } from "@/lib/icon-map";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type Bullet = string | { text: string; icon?: string };
 
 type Props = {
@@ -22,7 +24,8 @@ export function AboutMeSlide({ name, role, company, avatar, bullets, links }: Pr
       <motion.div
         className="flex-shrink-0 relative"
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+        viewport={VIEWPORT}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div
@@ -47,7 +50,8 @@ export function AboutMeSlide({ name, role, company, avatar, bullets, links }: Pr
       <div className="flex-1 flex flex-col gap-4">
         <motion.div
           initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.2 }}
         >
           <h2 className="text-4xl md:text-6xl font-bold text-[var(--text-primary)] leading-tight">
@@ -76,7 +80,8 @@ export function AboutMeSlide({ name, role, company, avatar, bullets, links }: Pr
                   key={i}
                   className="text-base md:text-lg text-[var(--text-secondary)] flex items-start gap-3"
                   initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={VIEWPORT}
                   transition={{ delay: 0.4 + i * 0.1 }}
                 >
                   {Icon ? (
@@ -99,7 +104,8 @@ export function AboutMeSlide({ name, role, company, avatar, bullets, links }: Pr
           <motion.div
             className="flex flex-wrap gap-3 mt-4"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT}
             transition={{ delay: 0.8 }}
           >
             {links.map((link) => (

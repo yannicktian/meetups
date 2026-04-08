@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { getIcon } from "@/lib/icon-map";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type Side = {
   label: string;
   title: string;
@@ -28,10 +30,10 @@ function SideCard({ side, index, isHighlighted }: { side: Side; index: number; i
       className="flex-1 bg-white rounded-2xl border-2 p-6 md:p-8 shadow-sm"
       style={{
         borderColor: isHighlighted ? accentColor : "var(--border)",
-        opacity: isHighlighted ? 1 : 0.85,
       }}
       initial={{ opacity: 0, x: index === 0 ? -30 : 30 }}
-      animate={{ opacity: isHighlighted ? 1 : 0.85, x: 0 }}
+      whileInView={{ opacity: isHighlighted ? 1 : 0.85, x: 0 }}
+      viewport={VIEWPORT}
       transition={{ delay: 0.3 + index * 0.15 }}
     >
       <div className="flex items-center gap-3 mb-4">
@@ -78,7 +80,8 @@ export function ComparisonSlide({ title, subtitle, left, right }: Props) {
         <motion.h2
           className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]"
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT}
         >
           {title}
         </motion.h2>
@@ -86,7 +89,8 @@ export function ComparisonSlide({ title, subtitle, left, right }: Props) {
           <motion.p
             className="text-lg text-[var(--text-secondary)] mt-2 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT}
             transition={{ delay: 0.1 }}
           >
             {subtitle}
@@ -101,7 +105,8 @@ export function ComparisonSlide({ title, subtitle, left, right }: Props) {
         <motion.div
           className="hidden md:flex items-center justify-center"
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.55 }}
         >
           <div

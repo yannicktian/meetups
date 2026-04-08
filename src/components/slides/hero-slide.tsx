@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type HeroEvent = {
   name?: string;
   date?: string;
@@ -31,7 +33,8 @@ export function HeroSlide({
         <motion.span
           className="inline-block px-4 py-1.5 rounded-full text-xs md:text-sm font-mono uppercase tracking-widest font-semibold bg-[var(--accent-soft)] text-[var(--accent)] border border-[var(--accent)]/20"
           initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.2 }}
         >
           {badge}
@@ -40,7 +43,8 @@ export function HeroSlide({
       <motion.h1
         className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight bg-gradient-to-br from-[var(--text-primary)] via-[var(--text-primary)] to-[var(--accent)] bg-clip-text text-transparent"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VIEWPORT}
         transition={{ delay: 0.3, duration: 0.7 }}
       >
         {title}
@@ -49,7 +53,8 @@ export function HeroSlide({
         <motion.p
           className="text-xl md:text-2xl lg:text-3xl text-[var(--text-secondary)] max-w-3xl font-light"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.5, duration: 0.7 }}
         >
           {subtitle}
@@ -61,7 +66,8 @@ export function HeroSlide({
         <motion.div
           className="flex flex-col gap-2 items-center mt-4"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.7 }}
         >
           {event.name && (
@@ -82,7 +88,8 @@ export function HeroSlide({
         <motion.div
           className="flex flex-col gap-1 items-center mt-2 pt-6 border-t border-[var(--border)] w-full max-w-md"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT}
           transition={{ delay: 0.9 }}
         >
           {hosts && (

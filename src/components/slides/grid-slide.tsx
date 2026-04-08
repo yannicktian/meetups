@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { getIcon } from "@/lib/icon-map";
 
+const VIEWPORT = { once: false, amount: 0.3 } as const;
+
 type GridItem = {
   icon?: string;
   title: string;
@@ -26,7 +28,8 @@ export function GridSlide({ title, subtitle, items, columns = 3 }: Props) {
         <motion.h2
           className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]"
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT}
         >
           {title}
         </motion.h2>
@@ -34,7 +37,8 @@ export function GridSlide({ title, subtitle, items, columns = 3 }: Props) {
           <motion.p
             className="text-lg text-[var(--text-secondary)] mt-3 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT}
             transition={{ delay: 0.1 }}
           >
             {subtitle}
@@ -52,7 +56,8 @@ export function GridSlide({ title, subtitle, items, columns = 3 }: Props) {
               key={item.title}
               className="bg-white rounded-xl border border-[var(--border)] p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT}
               transition={{ delay: 0.2 + i * 0.08 }}
             >
               <div className="flex items-start gap-3">
