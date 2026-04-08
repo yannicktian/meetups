@@ -39,7 +39,7 @@ export function SmsConversation({ messages, autoPlay = true }: Props) {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto">
+    <div className="w-full max-w-sm md:max-w-md mx-auto">
       {/* Phone frame */}
       <div className="bg-white rounded-[2rem] p-2 shadow-2xl border border-[var(--border)]">
         {/* Status bar */}
@@ -61,7 +61,7 @@ export function SmsConversation({ messages, autoPlay = true }: Props) {
         </div>
 
         {/* Messages */}
-        <div className="h-80 overflow-y-auto px-3 py-4 flex flex-col gap-2 bg-[var(--bg-surface-alt)]">
+        <div className="h-80 md:h-[34rem] lg:h-[38rem] overflow-y-auto px-3 py-4 flex flex-col gap-2 bg-[var(--bg-surface-alt)]">
           <AnimatePresence mode="popLayout">
             {messages.slice(0, visibleCount).map((msg, i) => (
               <motion.div
