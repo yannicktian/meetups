@@ -4,6 +4,7 @@ import { useSlideNav } from "@/lib/use-slide-nav";
 import { SlideWrapper } from "./slide-wrapper";
 import { TopNavBar } from "./top-nav-bar";
 import { registry } from "@/lib/registry";
+import { StageNavProvider } from "@/lib/stage-nav-context";
 import type { Slide } from "@/lib/types";
 
 type Props = {
@@ -11,6 +12,14 @@ type Props = {
 };
 
 export function SlidesDeck({ slides }: Props) {
+  return (
+    <StageNavProvider>
+      <SlidesDeckInner slides={slides} />
+    </StageNavProvider>
+  );
+}
+
+function SlidesDeckInner({ slides }: Props) {
   const { currentIndex, total, currentSection, goToSection } = useSlideNav(slides);
 
   return (

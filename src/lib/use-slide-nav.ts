@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import type { Slide, SlideSection } from "./types";
+import { useStageNav } from "./stage-nav-context";
 
 export function useSlideNav(slides: Slide[]) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,28 +65,37 @@ export function useSlideNav(slides: Slide[]) {
     [slides, goTo]
   );
 
+  const stageNav = useStageNav();
+
   // Keyboard navigation — left/right arrows for horizontal scroll
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      // Allow text inputs to work normally
       const target = e.target as HTMLElement;
       if (target?.tagName === "INPUT" || target?.tagName === "TEXTAREA") return;
 
-      if (
+      const activeSlideId = slides[currentIndex]?.id;
+      const stageHandlers = activeSlideId ? stageNav?.getHandlers(activeSlideId) : undefined;
+
+      const isNextKey =
         e.key === "ArrowRight" ||
-        e.key === " " ||
         e.key === "PageDown" ||
-        e.key === "ArrowDown"
-      ) {
-        e.preventDefault();
-        goTo(currentIndex + 1);
-      } else if (
+        e.key === "ArrowDown" ||
+        (e.key === " " && !e.shiftKey);
+
+      const isPrevKey =
         e.key === "ArrowLeft" ||
         e.key === "PageUp" ||
         e.key === "ArrowUp" ||
-        (e.key === " " && e.shiftKey)
-      ) {
+        (e.key === " " && e.shiftKey);
+
+      if (isNextKey) {
         e.preventDefault();
+        // Give the active slide a chance to consume the press first.
+        if (stageHandlers?.onNextRequest?.()) return;
+        goTo(currentIndex + 1);
+      } else if (isPrevKey) {
+        e.preventDefault();
+        if (stageHandlers?.onPrevRequest?.()) return;
         goTo(currentIndex - 1);
       } else if (e.key === "Home") {
         e.preventDefault();
@@ -98,7 +108,7 @@ export function useSlideNav(slides: Slide[]) {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [currentIndex, goTo, slides.length]);
+  }, [currentIndex, goTo, slides, slides.length, stageNav]);
 
   const currentSection = slides[currentIndex]?.section;
 
