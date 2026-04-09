@@ -236,14 +236,18 @@ export const slides: Slide[] = [
       heading: "Tweaking all of this is harness engineering.",
       subheading: "And 2026 is the year we get serious about it.",
       buckets: HARNESS_BUCKETS,
+      reference: {
+        label: "mastra-ai/workshops · harness-workshop",
+        url: "https://github.com/mastra-ai/workshops/tree/main/decks/harness-workshop",
+      },
     },
   },
 
   // ─── ALPHA ───────────────────────────────────────────────
   {
     id: "alpha-transition",
-    title: "Alpha",
-    subtitle: "The recruiter AI assistant",
+    title: "Let's step back",
+    subtitle: "Gojob's AI product journey",
     section: "alpha",
     component: "TransitionSlide",
     props: { color: "#10b981" },
@@ -298,7 +302,6 @@ export const slides: Slide[] = [
   {
     id: "alpha-demo",
     title: "Alpha in action",
-    subtitle: "An automated SMS conversation",
     section: "alpha",
     component: "InteractiveSlide",
     props: {
@@ -308,39 +311,39 @@ export const slides: Slide[] = [
           {
             sender: "agent",
             text: "Hello! I'm Alpha from Gojob. I have a warehouse operator position available. Are you interested?",
-            delay: 1200,
+            delay: 600,
           },
-          { sender: "candidate", text: "Yes, I'm interested!", delay: 800 },
+          { sender: "candidate", text: "Yes, I'm interested!", delay: 400 },
           {
             sender: "agent",
             text: "Great! Do you have a valid forklift license (CACES 1/3/5)?",
-            delay: 1000,
+            delay: 500,
           },
           {
             sender: "candidate",
             text: "Yes, I have CACES 1 and 3",
-            delay: 800,
+            delay: 400,
           },
           {
             sender: "agent",
             text: "Perfect. The position requires working in cold storage (-20°C). Is that okay for you?",
-            delay: 1200,
+            delay: 600,
           },
           {
             sender: "candidate",
             text: "No problem, I've done that before",
-            delay: 600,
+            delay: 300,
           },
           {
             sender: "agent",
             text: "Last question: can you start next Monday for a 3-month assignment?",
-            delay: 1000,
+            delay: 500,
           },
-          { sender: "candidate", text: "Yes, I'm available", delay: 500 },
+          { sender: "candidate", text: "Yes, I'm available", delay: 250 },
           {
             sender: "agent",
             text: "Excellent! You meet all the prerequisites. A recruiter will contact you shortly. Thank you!",
-            delay: 1500,
+            delay: 700,
           },
         ],
       },
@@ -586,16 +589,16 @@ export const slides: Slide[] = [
           icon: "RotateCw",
         },
         {
-          text: "Can't iterate — \"make #3 mandatory, add CACES 5\" re-runs from scratch and loses prior edits.",
+          text: 'Can\'t iterate — "make #3 mandatory, add CACES 5" re-runs from scratch and loses prior edits.',
           icon: "AlertTriangle",
           highlight: true,
         },
         {
-          text: "No memory — it forgets the recruiter between calls. \"Warehouse always needs French\"? It won't remember next time.",
+          text: 'No memory — it forgets the recruiter between calls. "Warehouse always needs French"? It won\'t remember next time.',
           icon: "Brain",
         },
         {
-          text: "No phases, no shared state — stepping beyond \"suggest prerequisites\" means a brand new flow, built from scratch.",
+          text: 'No phases, no shared state — stepping beyond "suggest prerequisites" means a brand new flow, built from scratch.',
           icon: "GitBranch",
         },
       ],
@@ -610,10 +613,10 @@ export const slides: Slide[] = [
     component: "NarrativeSlide",
     props: {
       subtitle:
-        "Zoom out — we keep shipping AI features on top of an old-fashioned product",
+        "Zoom out — we keep shipping AI features on top of a traditional product",
       bullets: [
         {
-          text: "Every \"AI feature\" lives on top of the existing UI — a button here, a streaming card there.",
+          text: 'Every "AI feature" lives on top of the existing UI — a button here, a streaming card there.',
           icon: "Layers",
         },
         {
@@ -625,7 +628,7 @@ export const slides: Slide[] = [
           icon: "AlertTriangle",
         },
         {
-          text: "What if we built the Claude Code for recruiters?",
+          text: "What if we build the Claude Code for recruiters?",
           icon: "Sparkles",
           highlight: true,
         },
@@ -636,8 +639,8 @@ export const slides: Slide[] = [
   // ─── HARNESS (ERNEST) ───────────────────────────────────
   {
     id: "pattern-transition",
-    title: "Harness",
-    subtitle: "So we built one — in 48 hours",
+    title: "Ernest",
+    subtitle: "So we built a recruiter's Harness — in 48 hours",
     section: "pattern",
     component: "TransitionSlide",
     props: { color: "#8b5cf6" },
@@ -655,7 +658,7 @@ export const slides: Slide[] = [
           icon: "Cpu",
         },
         {
-          text: "Built in 48 hours. One codebase handles the job posting, persona selection, prerequisites, and validation.",
+          text: "Built in 48 hours. One harness handles the job posting, persona selection, prerequisites, and validation.",
           icon: "Zap",
           highlight: true,
         },
@@ -668,6 +671,126 @@ export const slides: Slide[] = [
           icon: "Sparkles",
         },
       ],
+    },
+  },
+  {
+    id: "ernest-demo",
+    title: "",
+    section: "pattern",
+    component: "CalloutSlide",
+    props: {
+      title: "Live demo",
+      callout: "ernest.gojob.com/missions",
+      calloutHref: "https://ernest.gojob.com/missions",
+      attribution: "Let's open a mission and watch the harness work",
+      icon: "Sparkles",
+      kind: "insight",
+    },
+  },
+  {
+    id: "ernest-architecture",
+    title: "Under the hood",
+    section: "pattern",
+    component: "ArchitectureSlide",
+    props: {
+      subtitle: "One Mastra Harness per mission — state, agent, tools, events",
+      groups: [
+        {
+          id: "harness",
+          label: "Ernest Harness (Mastra)",
+          x: 160,
+          y: 110,
+          width: 640,
+          height: 250,
+          color: "#8b5cf6",
+        },
+      ],
+      nodes: [
+        {
+          id: "frontend",
+          label: "React Frontend",
+          x: 380,
+          y: 20,
+          width: 200,
+          height: 55,
+          color: "#ec4899",
+        },
+        {
+          id: "agent",
+          label: "Recruiter Agent",
+          x: 400,
+          y: 155,
+          width: 180,
+          height: 65,
+          color: "#8b5cf6",
+        },
+        {
+          id: "tools",
+          label: "Tools",
+          x: 610,
+          y: 155,
+          width: 170,
+          height: 65,
+          color: "#10b981",
+        },
+        {
+          id: "state",
+          label: "Typed State (Zod)",
+          x: 400,
+          y: 265,
+          width: 180,
+          height: 65,
+          color: "#6366f1",
+        },
+        {
+          id: "events",
+          label: "Event Stream",
+          x: 180,
+          y: 220,
+          width: 200,
+          height: 60,
+          color: "#f43f5e",
+        },
+        {
+          id: "llm",
+          label: "OpenAI GPT-4o",
+          x: 10,
+          y: 160,
+          width: 130,
+          height: 65,
+          color: "#f59e0b",
+        },
+        {
+          id: "storage",
+          label: "Postgres",
+          x: 810,
+          y: 265,
+          width: 140,
+          height: 65,
+          color: "#06b6d4",
+        },
+      ],
+      edges: [
+        {
+          from: "frontend",
+          to: "agent",
+          label: "sendMessage",
+          animated: true,
+        },
+        { from: "agent", to: "tools", label: "invoke" },
+        { from: "tools", to: "state", label: "setState" },
+        { from: "state", to: "events", label: "emit" },
+        {
+          from: "events",
+          to: "frontend",
+          label: "SSE",
+          animated: true,
+        },
+        { from: "agent", to: "llm", label: "model call" },
+        { from: "state", to: "storage", label: "persist" },
+      ],
+      width: 960,
+      height: 440,
     },
   },
   {
@@ -701,7 +824,7 @@ export const slides: Slide[] = [
         },
         {
           icon: "Wrench",
-          title: "Tools",
+          title: "Tools + Skills",
           description:
             "Every product action — generate personas, advance phase, save posting",
           color: "#8b5cf6",
@@ -724,19 +847,6 @@ export const slides: Slide[] = [
     },
   },
   {
-    id: "ernest-demo",
-    title: "",
-    section: "pattern",
-    component: "CalloutSlide",
-    props: {
-      title: "Live demo",
-      callout: "ernest.gojob.com/missions",
-      attribution: "Let's open a mission and watch the harness work",
-      icon: "Sparkles",
-      kind: "insight",
-    },
-  },
-  {
     id: "mastra-quote",
     title: "The stack: Mastra",
     section: "pattern",
@@ -750,55 +860,26 @@ export const slides: Slide[] = [
     },
   },
   {
-    id: "mastra-harness-code",
-    title: "Mastra ships the Harness class",
-    section: "pattern",
-    component: "NarrativeSlide",
-    props: {
-      subtitle: "State schema, modes, storage, events — out of the box",
-      bullets: [
-        { text: "Typed state schema (Zod)", icon: "Box" },
-        { text: "Multi-mode agents with dynamic routing", icon: "Layers" },
-        { text: "Subscribe-based event stream to the UI", icon: "Radio" },
-        {
-          text: "Persistent threads, memory, tool approvals",
-          icon: "Workflow",
-        },
-      ],
-      code: `const harness = new Harness({
-  id: "my-harness",
-  storage,
-  stateSchema: z.object({
-    currentMode: z.string().optional(),
-  }),
-  modes: [
-    { id: "plan", default: true, agent: planAgent },
-    { id: "build", agent: buildAgent },
-  ],
-});
-
-harness.subscribe(event => renderUI(event));
-await harness.sendMessage({ content: "..." });`,
-      codeLang: "typescript",
-      codeCaption: "mastra.ai/reference/harness/harness-class",
-    },
-  },
-  {
     id: "ernest-factory",
-    title: "One factory call and Ernest is wired up",
+    title: "Ernest, 20 lines on top of Mastra",
     section: "pattern",
     component: "NarrativeSlide",
     props: {
-      subtitle: "Mission state, phases, and the recruiter agent — in 20 lines",
+      subtitle:
+        "One Harness class — state, modes, memory, events, all wired for us",
       bullets: [
-        { text: "One harness instance per recruiting mission", icon: "Cpu" },
         {
-          text: "Phases: define posting → swipe personas → set prerequisites → validate",
-          icon: "GitBranch",
+          text: "We wrote: the schema, the initial state, our recruiter agent",
+          icon: "Cpu",
         },
         {
-          text: "The recruiter agent reads and updates mission state at any time",
-          icon: "Database",
+          text: "Mastra wires: persistence, memory, events, tool loop",
+          icon: "Workflow",
+          highlight: true,
+        },
+        {
+          text: "One harness per mission — keyed by recruiter + site",
+          icon: "Shield",
         },
       ],
       code: `export function createRecruiterHarness(resourceId: string) {
@@ -806,6 +887,7 @@ await harness.sendMessage({ content: "..." });`,
     id: "ernest-recruiter",
     resourceId,
     storage,
+    memory, // shared across modes → resumable conversations
     stateSchema: missionStateSchema,
     initialState: {
       missionDraft: { status: "draft", phase: "job_posting" },
@@ -819,40 +901,43 @@ await harness.sendMessage({ content: "..." });`,
   });
 }`,
       codeLang: "typescript",
-      codeCaption: "kitsune/agents/harness/factory.ts",
+      codeCaption: "ernest/agents/harness/factory.ts",
+      codeWide: true,
     },
   },
   {
     id: "ernest-state",
-    title: "Typed state is the foundation",
+    title: "Typed state: the single source of truth",
     section: "pattern",
     component: "NarrativeSlide",
     props: {
-      subtitle:
-        "Single Zod schema = single source of truth for the mission",
+      subtitle: "One Zod schema — the contract between agent, tools, and UI",
       bullets: [
         {
-          text: "The agent reads state to know what phase it's in",
+          text: "Agent reads it to know what phase it's in",
           icon: "Eye",
         },
         {
-          text: "Tools mutate state, never the database directly",
+          text: "Tools mutate it via harness.setState — never the DB",
           icon: "Wrench",
         },
         {
-          text: "Frontend listens to state changes and re-renders — no polling",
-          icon: "Radio",
+          text: "Mastra validates, persists, then fires an event",
+          icon: "Shield",
         },
         {
-          text: "Same schema everywhere — the entire system is type-safe",
-          icon: "Shield",
+          text: "Frontend subscribes — no polling, no re-fetches",
+          icon: "Radio",
         },
       ],
       code: `const missionStateSchema = z.object({
   missionDraft: z.object({
     phase: z.enum([
-      "job_posting", "persona_swiping",
-      "prerequisite", "validation", "complete",
+      "job_posting",
+      "persona_swiping",
+      "prerequisite",
+      "validation",
+      "complete",
     ]),
     jobPosting: jobPostingSchema.partial().optional(),
     matchingCriteria: matchingCriteriaSchema.optional(),
@@ -861,32 +946,36 @@ await harness.sendMessage({ content: "..." });`,
   currentPersonas: z.array(personaSchema).default([]),
 });`,
       codeLang: "typescript",
-      codeCaption: "kitsune/agents/harness/state-schema.ts",
+      codeCaption: "ernest/agents/harness/state-schema.ts",
+      codeWide: true,
     },
   },
   {
     id: "ernest-tools",
-    title: "Tools = product features",
+    title: "Tools: the typed state setters",
     section: "pattern",
     component: "NarrativeSlide",
     props: {
       subtitle:
-        "Every action the recruiter can take is a tool the agent can invoke",
+        "A product feature = skill (the know-how) + tool (the state mutation)",
       bullets: [
         {
-          text: "Each tool is typed, validated, and observable",
-          icon: "Shield",
-        },
-        {
-          text: "The agent decides when to call them based on intent",
+          text: "Skill = how to do it — lives in phase instructions (next slide →)",
           icon: "Brain",
         },
         {
-          text: "Tools mutate harness state → events fire → UI updates",
-          icon: "Activity",
+          text: "Tool = where it lands — typed, validated, pure state mutation",
+          icon: "Wrench",
+          highlight: true,
+        },
+        {
+          text: "Agent reasons using the skill, then calls the tool to persist",
+          icon: "Workflow",
         },
       ],
-      code: `export const generatePersonas = createTool({
+      code: `// No LLM call, no reasoning — just a typed state setter.
+// The agent already produced the personas using its skill.
+export const generatePersonas = createTool({
   id: "generate-personas",
   description: "Store newly generated candidate personas.",
   inputSchema: z.object({
@@ -903,78 +992,105 @@ await harness.sendMessage({ content: "..." });`,
   },
 });`,
       codeLang: "typescript",
-      codeCaption: "kitsune/agents/tools/generate-personas.ts",
+      codeCaption: "ernest/agents/tools/generate-personas.ts",
+      codeWide: true,
     },
   },
   {
     id: "ernest-phases",
-    title: "Phase-aware instructions",
+    title: "Skills: the phase-aware know-how",
     section: "pattern",
     component: "NarrativeSlide",
     props: {
-      subtitle: "The system prompt depends on the current state",
+      subtitle:
+        "Markdown files (SKILL.md) loaded per phase — Claude Code's convention",
       bullets: [
-        { text: "One agent definition, multiple behaviors", icon: "Layers" },
         {
-          text: "Prompt regenerated on every turn from harness state",
+          text: "One SKILL.md per phase — plain markdown, version-controlled",
+          icon: "Brain",
+          highlight: true,
+        },
+        {
+          text: "Loaded on every turn based on the current phase in harness state",
           icon: "RotateCw",
         },
         {
-          text: "No fragile state machines hidden inside the prompt",
-          icon: "Shield",
+          text: "One agent, four behaviors — structure in the schema, not in prompt hacks",
+          icon: "Layers",
         },
       ],
-      code: `export const recruiterAgent = new Agent({
+      code: `// Skills = markdown files, Claude Code's SKILL.md convention:
+//
+//   skills/
+//     ├── job-posting/SKILL.md
+//     ├── persona-swiping/SKILL.md   ← loaded in persona_swiping
+//     ├── prerequisite/SKILL.md
+//     └── validation/SKILL.md
+
+export const recruiterAgent = new Agent({
   id: "recruiter",
   model: "openai/gpt-4o",
   instructions: ({ requestContext }) => {
     const harness = requestContext.get("harness");
-    const phase = harness.getState().missionDraft.phase;
-    return buildInstructions(phase);
+    const { phase } = harness.getState().missionDraft;
+    return loadSkill(phase); // reads skills/\${phase}/SKILL.md
   },
-  tools: { generatePersonas, advancePhase, /* ... */ },
+  tools: {
+    generatePersonas,
+    recordSwipe,
+    inferWeights,
+    advancePhase,
+    /* ... */
+  },
 });`,
       codeLang: "typescript",
-      codeCaption: "kitsune/agents/recruiter.ts",
+      codeCaption: "ernest/agents/recruiter.ts",
+      codeWide: true,
     },
   },
   {
     id: "ernest-multi-round",
-    title: "Multi-round iteration",
+    title: "Multi-round iteration, for free",
     section: "pattern",
     component: "NarrativeSlide",
     props: {
-      subtitle: "The agent can pause, wait for the recruiter, then continue",
+      subtitle: "Threads + memory make the whole conversation resumable",
       bullets: [
         {
-          text: "Agent proposes a plan → state enters 'waiting'",
-          icon: "Activity",
+          text: "subscribe() — every state change streams to the UI",
+          icon: "Radio",
         },
         {
-          text: "Recruiter reviews, edits, approves → state resumes",
-          icon: "Users",
+          text: "sendMessage() — each recruiter turn appends to the thread",
+          icon: "MessageSquare",
         },
         {
-          text: "Conversation persists across rounds via memory + threads",
+          text: "Mastra persists thread + memory — no loop to reinvent",
           icon: "Brain",
+          highlight: true,
         },
         {
-          text: "This is how harnesses feel collaborative, not robotic",
+          text: "Close the tab, come back tomorrow — the mission resumes",
           icon: "Sparkles",
         },
       ],
-      code: `while (!aborted) {
-  await harness.setState({ status: "waiting" });
-  const signal = await waitForUserFeedback();
-  if (signal.type === "done") break;
+      code: `// Backend: pipe every state change to the frontend
+harness.subscribe((event) => sseStream.push(event));
 
-  await harness.setState({ status: "executing" });
-  await harness.sendMessage({
-    content: \`User feedback: \${signal.text}\`,
-  });
-}`,
+// Recruiter kicks off the mission
+await harness.sendMessage({
+  content: "Warehouse operator, CACES 3 required",
+});
+
+// Later — recruiter reviews, sends feedback.
+// Thread + memory persist automatically,
+// so the agent resumes with full context.
+await harness.sendMessage({
+  content: "Rework persona 3 — too senior",
+});`,
       codeLang: "typescript",
-      codeCaption: "harness pattern: multi-round loop",
+      codeCaption: "ernest: recruiter interaction loop",
+      codeWide: true,
     },
   },
 
@@ -998,10 +1114,10 @@ await harness.sendMessage({ content: "..." });`,
         label: "Yesterday",
         title: "Navigate to find features",
         bullets: [
-          "Menus, forms, dropdowns",
-          "Users learn the UI",
-          "Click. Click. Click.",
-          "Features hidden in submenus",
+          { text: "Menus, forms, dropdowns", icon: "Layers" },
+          { text: "Users learn the UI", icon: "GraduationCap" },
+          { text: "Click. Click. Click.", icon: "RotateCw" },
+          { text: "Features hidden in submenus", icon: "HelpCircle" },
         ],
         icon: "Layers",
         color: "#a1a1aa",
@@ -1010,10 +1126,10 @@ await harness.sendMessage({ content: "..." });`,
         label: "Today",
         title: "Describe what you want",
         bullets: [
-          "One input. Captures intent.",
-          "Agent picks the right tools",
-          "Rich UI rendered inline",
-          '"Saves clicks" is the entire premise',
+          { text: "One input — captures intent", icon: "MessageSquare" },
+          { text: "Agent picks the right tools", icon: "Brain" },
+          { text: "Rich UI rendered inline", icon: "Sparkles" },
+          { text: '"Saves clicks" is the entire premise', icon: "Zap" },
         ],
         icon: "Sparkles",
         color: "#f43f5e",

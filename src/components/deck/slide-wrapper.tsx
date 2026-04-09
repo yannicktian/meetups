@@ -52,7 +52,7 @@ export function SlideWrapper({ id, section, children }: Props) {
        * content box. Tall slides must fit the viewport by their own layout —
        * the parent <section> handles final clipping at the viewport edge. */}
       <motion.div
-        className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 md:px-12 lg:px-16"
+        className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-16"
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.5, ease: "easeOut" }}

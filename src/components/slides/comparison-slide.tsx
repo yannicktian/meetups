@@ -6,10 +6,12 @@ import { getIcon } from "@/lib/icon-map";
 
 const VIEWPORT = { once: false, amount: 0.3 } as const;
 
+type Bullet = string | { text: string; icon?: string };
+
 type Side = {
   label: string;
   title: string;
-  bullets: string[];
+  bullets: Bullet[];
   icon?: string;
   color?: string;
 };
@@ -66,16 +68,35 @@ function SideCard({
       <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-4 leading-tight">
         {side.title}
       </h3>
-      <ul className="flex flex-col gap-2.5">
-        {side.bullets.map((bullet, i) => (
-          <li
-            key={i}
-            className="text-base md:text-lg lg:text-xl text-[var(--text-secondary)] flex items-start gap-2"
-          >
-            <span className="text-[var(--text-muted)] mt-1.5 flex-shrink-0">•</span>
-            <span>{bullet}</span>
-          </li>
-        ))}
+      <ul className="flex flex-col gap-3">
+        {side.bullets.map((bullet, i) => {
+          const text = typeof bullet === "string" ? bullet : bullet.text;
+          const BulletIcon =
+            typeof bullet === "string" ? null : getIcon(bullet.icon);
+          return (
+            <li
+              key={i}
+              className="text-base md:text-lg lg:text-xl text-[var(--text-secondary)] flex items-start gap-3"
+            >
+              {BulletIcon ? (
+                <div
+                  className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center mt-0.5"
+                  style={{
+                    background: `${accentColor}14`,
+                    color: accentColor,
+                  }}
+                >
+                  <BulletIcon className="w-4 h-4" strokeWidth={2.25} />
+                </div>
+              ) : (
+                <span className="text-[var(--text-muted)] mt-1.5 flex-shrink-0 w-2 text-center">
+                  •
+                </span>
+              )}
+              <span className="flex-1 leading-snug">{text}</span>
+            </li>
+          );
+        })}
       </ul>
     </motion.div>
   );

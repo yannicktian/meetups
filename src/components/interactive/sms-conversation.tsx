@@ -41,7 +41,7 @@ export function SmsConversation({ messages, autoPlay = true }: Props) {
     if (!isInView || !autoPlay) return;
     if (visibleCount >= messages.length) return;
 
-    const timer = setTimeout(playNext, visibleCount === 0 ? 500 : 300);
+    const timer = setTimeout(playNext, visibleCount === 0 ? 300 : 180);
     return () => clearTimeout(timer);
   }, [isInView, autoPlay, visibleCount, messages.length, playNext]);
 
@@ -81,7 +81,7 @@ export function SmsConversation({ messages, autoPlay = true }: Props) {
         </div>
 
         {/* Messages */}
-        <div className="h-80 md:h-[34rem] lg:h-[38rem] overflow-y-auto px-3 py-4 flex flex-col gap-2 bg-[var(--bg-surface-alt)]">
+        <div className="h-64 md:h-[24rem] lg:h-[28rem] overflow-y-auto px-3 py-4 flex flex-col gap-2 bg-[var(--bg-surface-alt)]">
           <AnimatePresence mode="popLayout">
             {messages.slice(0, visibleCount).map((msg, i) => (
               <motion.div

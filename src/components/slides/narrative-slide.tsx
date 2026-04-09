@@ -24,6 +24,10 @@ type Props = {
   code?: string;
   codeLang?: string;
   codeCaption?: string;
+  /** When true (and code is present), give the code pane more horizontal
+   * space (roughly 60/40) at md+ breakpoints so longer lines fit without
+   * horizontal scrolling. Use for code-centric slides. */
+  codeWide?: boolean;
   size?: Size;
   tags?: string[];
   tagsVariant?: TagsVariant;
@@ -44,6 +48,7 @@ export function NarrativeSlide({
   code,
   codeLang,
   codeCaption,
+  codeWide,
   size = "default",
   tags,
   tagsVariant = "muted",
@@ -127,7 +132,9 @@ export function NarrativeSlide({
       className={`flex flex-col ${hasVisual ? "md:flex-row" : ""} items-center gap-6 md:gap-10 lg:gap-12 ${reversed ? "md:flex-row-reverse" : ""}`}
     >
       {/* Text side */}
-      <div className="flex-1 flex flex-col gap-4 min-w-0 w-full">
+      <div
+        className={`flex-1 ${codeWide ? "md:flex-[0.7]" : ""} flex flex-col gap-4 min-w-0 w-full`}
+      >
         {title && (
           <motion.h2
             className={titleClass}
@@ -245,7 +252,7 @@ export function NarrativeSlide({
       {/* Visual side: children OR code */}
       {hasVisual && (
         <motion.div
-          className="flex-1 w-full min-w-0"
+          className={`flex-1 ${codeWide ? "md:flex-[1.3]" : ""} w-full min-w-0`}
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={VIEWPORT}

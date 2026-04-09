@@ -11,6 +11,7 @@ type Props = {
   title?: string;
   subtitle?: string;
   callout: string;
+  calloutHref?: string;
   attribution?: string;
   icon?: string;
   kind?: CalloutKind;
@@ -27,6 +28,7 @@ export function CalloutSlide({
   title,
   subtitle,
   callout,
+  calloutHref,
   attribution,
   icon = "Lightbulb",
   kind = "insight",
@@ -83,7 +85,19 @@ export function CalloutSlide({
         )}
 
         <p className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight text-[var(--text-primary)] mt-2">
-          {callout}
+          {calloutHref ? (
+            <a
+              href={calloutHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-2 underline-offset-4 hover:opacity-80 transition-opacity"
+              style={{ textDecorationColor: style.iconColor }}
+            >
+              {callout}
+            </a>
+          ) : (
+            callout
+          )}
         </p>
 
         {attribution && (

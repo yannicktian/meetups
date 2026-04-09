@@ -225,6 +225,11 @@ Agent has almost no autonomy, no reasoning, no skill. Only prompt engineering an
 What if we create the claude code for recruiters?
 
 Vision
+Can't we just use claude code with dedicated domain skills + rich tool ui rendering (such as thesys openui.com)?
+Claude agent-sdk
+Claude managed agents
 1 User intent
 2 Harness + OpenClaw => Agent suggests, asks the user
 3 Agent is fully autonomous
+Latent space article, future is autonomous agent, self improving // Symphony project
+add a quote, opens discussion

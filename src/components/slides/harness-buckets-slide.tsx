@@ -13,6 +13,10 @@ type Props = {
   heading: string;
   subheading?: string;
   buckets: Bucket[];
+  reference?: {
+    label: string;
+    url: string;
+  };
 };
 
 /** Gathered bucket-grid slide — the pay-off to the scattered cloud.
@@ -20,7 +24,12 @@ type Props = {
  * Each bucket fades in as a column (label + chips), then the chips in each
  * column appear with a small stagger so the grid fills in like a checklist.
  */
-export function HarnessBucketsSlide({ heading, subheading, buckets }: Props) {
+export function HarnessBucketsSlide({
+  heading,
+  subheading,
+  buckets,
+  reference,
+}: Props) {
   const { ref: viewRef, isInView } = useInView(0.3);
 
   return (
@@ -97,6 +106,24 @@ export function HarnessBucketsSlide({ heading, subheading, buckets }: Props) {
           </motion.div>
         ))}
       </div>
+
+      {reference && (
+        <motion.a
+          href={reference.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative z-10 mt-10 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--text-secondary)]/25 text-sm md:text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-secondary)]/50 transition-colors"
+          initial={{ opacity: 0, y: 8 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{
+            delay: 0.5 + buckets.length * 0.06,
+            duration: 0.45,
+          }}
+        >
+          <span className="opacity-60">Dive deeper →</span>
+          <span className="font-mono">{reference.label}</span>
+        </motion.a>
+      )}
     </div>
   );
 }

@@ -56,7 +56,7 @@ Everyday slide edits only need `src/content/slides.ts` + this quick lookup.
 | `alpha`   | `#10b981` | Alpha        |
 | `saas`    | `#f59e0b` | SaaS         |
 | `agent`   | `#ec4899` | In-App Agent |
-| `pattern` | `#8b5cf6` | Harness      |
+| `pattern` | `#8b5cf6` | Ernest       |
 | `vision`  | `#f43f5e` | The Vision   |
 
 `TransitionSlide.color` should match the section color.

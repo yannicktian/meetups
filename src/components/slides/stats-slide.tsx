@@ -18,18 +18,33 @@ type Props = {
   stats: StatItem[];
 };
 
-function formatValue(v: number) {
-  if (v >= 1_000_000) {
-    const m = v / 1_000_000;
-    return `${Number.isInteger(m) ? m : m.toFixed(1)}M`;
-  }
-  if (v >= 1_000) return `${Math.round(v / 1_000)}K`;
+type Scale = "M" | "K" | "raw";
+
+function getScale(target: number): Scale {
+  if (target >= 1_000_000) return "M";
+  if (target >= 1_000) return "K";
+  return "raw";
+}
+
+/** Format a counter value at a fixed scale. Keeping the scale fixed for
+ * the duration of the animation ensures intermediate strings are never
+ * wider than the final string — so the row never reflows mid-animation. */
+function formatAtScale(v: number, scale: Scale): string {
+  if (scale === "M") return `${Math.round(v / 1_000_000)}M`;
+  if (scale === "K") return `${Math.round(v / 1_000)}K`;
   return Math.round(v).toLocaleString();
 }
 
+/** Format a static value using auto-detected scale — used by the
+ * ComparisonCounter's "from" display. */
+function formatValue(v: number): string {
+  return formatAtScale(v, getScale(v));
+}
+
 function AnimatedCounter({ value, suffix }: { value: number; suffix?: string }) {
+  const scale = getScale(value);
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => formatValue(v));
+  const rounded = useTransform(count, (v) => formatAtScale(v, scale));
   const { ref, isInView } = useInView(0.5);
 
   useEffect(() => {
@@ -40,6 +55,9 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix?: string }) 
     }
   }, [isInView, count, value]);
 
+  // Scale-based formatting guarantees intermediate strings are never wider
+  // than the final value — no ghost placeholder needed, and the counter
+  // stays a direct child of the bg-clip-text parent (gradient renders).
   return (
     <span ref={ref as React.RefObject<HTMLSpanElement>}>
       <motion.span>{rounded}</motion.span>

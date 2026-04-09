@@ -71,7 +71,7 @@ export const SECTIONS: readonly SectionInfo[] = [
   { id: "alpha", label: "Alpha", short: "Alpha", color: "#10b981" },
   { id: "saas", label: "SaaS", short: "SaaS", color: "#f59e0b" },
   { id: "agent", label: "In-App Agent", short: "Agent", color: "#ec4899" },
-  { id: "pattern", label: "Harness", short: "Harness", color: "#8b5cf6" },
+  { id: "pattern", label: "Ernest", short: "Ernest", color: "#8b5cf6" },
   { id: "vision", label: "The Vision", short: "Vision", color: "#f43f5e" },
 ] as const;
 
@@ -89,6 +89,6 @@ export const SECTION_LABELS: Record<SlideSection, string> = {
   alpha: "Alpha",
   saas: "SaaS",
   agent: "In-App Agent",
-  pattern: "Harness",
+  pattern: "Ernest",
   vision: "The Vision",
 };
