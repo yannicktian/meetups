@@ -13,13 +13,47 @@ type Props = {
   height?: number;
 };
 
-function getNodeCenter(node: DiagramNode) {
-  return { x: node.x + node.width / 2, y: node.y + node.height / 2 };
-}
-
 // Add alpha to a hex color (e.g., "#10b981" + "1a" → light tint)
 function withAlpha(hex: string, alpha: string): string {
   return hex + alpha;
+}
+
+/** Pick an edge's start/end points on the source and target node borders
+ * (not the node centers), so the line never runs through the rectangles
+ * and the midpoint sits in the gap between them. Uses the dominant axis
+ * to decide which side of each node to attach to. */
+function getEdgePoints(from: DiagramNode, to: DiagramNode) {
+  const fromCx = from.x + from.width / 2;
+  const fromCy = from.y + from.height / 2;
+  const toCx = to.x + to.width / 2;
+  const toCy = to.y + to.height / 2;
+  const dx = toCx - fromCx;
+  const dy = toCy - fromCy;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    // Primarily horizontal — attach to left/right edges
+    return {
+      start: {
+        x: dx > 0 ? from.x + from.width : from.x,
+        y: fromCy,
+      },
+      end: {
+        x: dx > 0 ? to.x : to.x + to.width,
+        y: toCy,
+      },
+    };
+  }
+  // Primarily vertical — attach to top/bottom edges
+  return {
+    start: {
+      x: fromCx,
+      y: dy > 0 ? from.y + from.height : from.y,
+    },
+    end: {
+      x: toCx,
+      y: dy > 0 ? to.y : to.y + to.height,
+    },
+  };
 }
 
 export function ArchitectureDiagram({
@@ -30,6 +64,19 @@ export function ArchitectureDiagram({
   height = 500,
 }: Props) {
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
+
+  // Precompute each edge's resolved endpoints so we can render the line
+  // and the label in separate passes (line → behind nodes, label → in
+  // front of nodes) without recomputing geometry.
+  const edgeLayouts = edges
+    .map((edge) => {
+      const from = nodeMap.get(edge.from);
+      const to = nodeMap.get(edge.to);
+      if (!from || !to) return null;
+      const { start, end } = getEdgePoints(from, to);
+      return { edge, start, end };
+    })
+    .filter((l): l is NonNullable<typeof l> => l !== null);
 
   return (
     <svg
@@ -79,63 +126,24 @@ export function ArchitectureDiagram({
         </motion.g>
       ))}
 
-      {/* Edges */}
-      {edges.map((edge, i) => {
-        const from = nodeMap.get(edge.from);
-        const to = nodeMap.get(edge.to);
-        if (!from || !to) return null;
-        const start = getNodeCenter(from);
-        const end = getNodeCenter(to);
-
-        return (
-          <motion.g key={`${edge.from}-${edge.to}`}>
-            <motion.line
-              x1={start.x}
-              y1={start.y}
-              x2={end.x}
-              y2={end.y}
-              stroke="#a1a1aa"
-              strokeWidth={1.75}
-              strokeDasharray={edge.animated ? "6 4" : undefined}
-              initial={{ pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: 0.7 }}
-              viewport={VIEWPORT}
-              transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
-            />
-            {edge.label && (
-              <motion.g
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={VIEWPORT}
-                transition={{ delay: 0.8 + i * 0.1 }}
-              >
-                {/* Label background pill */}
-                <rect
-                  x={(start.x + end.x) / 2 - edge.label.length * 3.5}
-                  y={(start.y + end.y) / 2 - 10}
-                  width={edge.label.length * 7}
-                  height={16}
-                  rx={8}
-                  fill="#fafaf9"
-                  stroke="#e7e5e4"
-                  strokeWidth={0.5}
-                />
-                <text
-                  x={(start.x + end.x) / 2}
-                  y={(start.y + end.y) / 2 + 1}
-                  fill="#52525b"
-                  fontSize={10}
-                  fontFamily="ui-monospace, monospace"
-                  fontWeight={500}
-                  textAnchor="middle"
-                >
-                  {edge.label}
-                </text>
-              </motion.g>
-            )}
-          </motion.g>
-        );
-      })}
+      {/* Edge lines (rendered behind nodes) */}
+      {edgeLayouts.map(({ edge, start, end }, i) => (
+        <motion.line
+          key={`line-${edge.from}-${edge.to}`}
+          x1={start.x}
+          y1={start.y}
+          x2={end.x}
+          y2={end.y}
+          stroke="#a1a1aa"
+          strokeWidth={1.75}
+          strokeDasharray={edge.animated ? "6 4" : undefined}
+          strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          whileInView={{ pathLength: 1, opacity: 0.7 }}
+          viewport={VIEWPORT}
+          transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
+        />
+      ))}
 
       {/* Nodes */}
       {nodes.map((node, i) => (
@@ -180,6 +188,46 @@ export function ArchitectureDiagram({
           </text>
         </motion.g>
       ))}
+
+      {/* Edge labels (rendered on top of nodes so short gaps never clip them) */}
+      {edgeLayouts.map(({ edge, start, end }, i) => {
+        if (!edge.label) return null;
+        const midX = (start.x + end.x) / 2;
+        const midY = (start.y + end.y) / 2;
+        const textWidth = edge.label.length * 6.2;
+        const padX = 6;
+        return (
+          <motion.g
+            key={`label-${edge.from}-${edge.to}`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT}
+            transition={{ delay: 0.9 + i * 0.1 }}
+          >
+            <rect
+              x={midX - textWidth / 2 - padX}
+              y={midY - 9}
+              width={textWidth + padX * 2}
+              height={18}
+              rx={9}
+              fill="#fafaf9"
+              stroke="#d6d3d1"
+              strokeWidth={1}
+            />
+            <text
+              x={midX}
+              y={midY + 3}
+              fill="#52525b"
+              fontSize={10}
+              fontFamily="ui-monospace, monospace"
+              fontWeight={500}
+              textAnchor="middle"
+            >
+              {edge.label}
+            </text>
+          </motion.g>
+        );
+      })}
     </svg>
   );
 }
