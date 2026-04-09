@@ -1093,6 +1093,56 @@ await harness.sendMessage({
       codeWide: true,
     },
   },
+  {
+    id: "production-challenges",
+    title: "Easy to build. Hard to productionize.",
+    section: "pattern",
+    component: "GridSlide",
+    props: {
+      subtitle:
+        "Reliability is the boring 80% that separates a hackathon from production.",
+      columns: 3,
+      items: [
+        {
+          icon: "DollarSign",
+          title: "Token budgets",
+          description: "Per-request caps, cost alarms, diminishing returns",
+          color: "#f59e0b",
+        },
+        {
+          icon: "Activity",
+          title: "Observability",
+          description: "Every turn traced — prompt, tools, latency, cost",
+          color: "#06b6d4",
+        },
+        {
+          icon: "Shield",
+          title: "Error recovery",
+          description:
+            "Rate-limit, overflow, provider-down — each its own handler",
+          color: "#f43f5e",
+        },
+        {
+          icon: "Users",
+          title: "Multi-tenant",
+          description: "Every query scoped — no cross-tenant leaks, ever",
+          color: "#10b981",
+        },
+        {
+          icon: "Network",
+          title: "Model routing",
+          description: "OpenAI, Anthropic, Gemini — swap per request",
+          color: "#6366f1",
+        },
+        {
+          icon: "GitBranch",
+          title: "Evals + drift",
+          description: "Catch regression before the user does",
+          color: "#8b5cf6",
+        },
+      ],
+    },
+  },
 
   // ─── THE VISION ──────────────────────────────────────────
   {
