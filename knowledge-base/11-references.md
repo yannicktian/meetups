@@ -8,7 +8,7 @@ audience_level: all
 
 ## Primary sources
 
-### Anthropic / Claude Code
+### Anthropic / Claude Code / Managed Agents
 
 | Source | URL | Used for |
 |--------|-----|----------|
@@ -17,6 +17,7 @@ audience_level: all
 | Claude Code best practices | https://code.claude.com/docs/en/best-practices | "Agentic environment" framing, plan mode, tool use patterns |
 | Skills documentation | https://code.claude.com/docs/en/skills | Skills as composable capabilities |
 | MCP integration docs | https://code.claude.com/docs/en/mcp | MCP server pattern |
+| **Managed Agents overview** | **https://docs.claude.com/en/managed-agents/overview** | **Hosted agent runtime, beta launched April 1, 2026** |
 
 #### Direct quotes
 
@@ -28,6 +29,12 @@ audience_level: all
 
 > **"Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools."**
 > — Claude Code overview
+
+> **"The harness — event stream, sandbox orchestration, prompt caching, context compaction, and extended thinking — is handled for you."**
+> — Anthropic Managed Agents docs (`managed-agents-2026-04-01`) — 🎯 key citation for the `just-use-agent-sdk` slide; Anthropic's own docs now use the word *harness*
+
+> **"It's like you create an entity much smarter than you, and then it creates an even smarter entity. You have no idea where it will end."**
+> — Jared Kaplan (Anthropic co-founder & chief scientist), interview with *The Guardian* — used on the `vision-arc` slide, stage 3 "self-improving"
 
 ---
 
@@ -84,6 +91,52 @@ audience_level: all
 
 ---
 
+### Thesys — C1 generative UI API
+
+| Source | URL | Used for |
+|--------|-----|----------|
+| Thesys homepage | https://thesys.dev | Definition of C1, rendering layer for tool calls |
+
+#### Direct quotes
+
+> **"C1 by Thesys is an API middleware that augments LLMs to respond with interactive UI in realtime instead of text."**
+> — thesys.dev
+
+> **"Make AI apps respond with interactive UI in realtime"**
+> — thesys.dev (hero tagline)
+
+> **"C1 is an OpenAI-compatible endpoint that plugs into any language, framework, or MCP"** — supports Claude and OpenAI out of the box.
+> — thesys.dev
+
+Used on the `just-use-agent-sdk` slide as one of the pre-shipped pieces (alongside SKILL.md) audience members might reach for before building a custom harness.
+
+---
+
+### OpenClaw — always-on personal agent
+
+| Source | URL | Used for |
+|--------|-----|----------|
+| OpenClaw Claude Code plugin | https://github.com/Enderfga/openclaw-claude-code | Continuous-monitoring pattern, "agent never sleeps" |
+| VentureBeat coverage | https://venturebeat.com/technology/claude-openclaw-and-the-new-reality-ai-agents-are-here-and-so-is-the-chaos | Product positioning, market context |
+| Anthropic pricing shift (PYMNTS, April 4, 2026) | https://www.pymnts.com/artificial-intelligence-2/2026/third-party-agents-lose-access-as-anthropic-tightens-claude-usage-rules/ | Anthropic pushing OpenClaw users to pay-as-you-go |
+
+**Key facts:**
+- Built by **Peter Steinberger** (formerly PSPDFKit)
+- Open-source, local-first, 24/7 always-on personal assistant
+- Reached via Telegram, WhatsApp, Discord
+- **247,000+ GitHub stars** by March 2026 — one of the fastest-growing OSS projects of 2026
+- `/loop` primitive runs prompts on recurring intervals ("check my email every 5 minutes")
+
+Used on the `vision-arc` slide, stage 2 "The agent never sleeps" — citation: *OpenClaw (P. Steinberger · 247k★)*
+
+---
+
+## Further detail
+
+For the full write-ups of the vision-section references (Anthropic Managed Agents, Thesys C1, OpenClaw, Kaplan quote, and the Symphony clarification), see **[`12-vision-arc-references.md`](./12-vision-arc-references.md)**.
+
+---
+
 ## Code references (private)
 
 These are internal to Gojob and not publicly accessible, but they're the source of every code snippet in the talk.
@@ -101,8 +154,10 @@ These are internal to Gojob and not publicly accessible, but they're the source 
 ## The talk's key citations (in delivery order)
 
 1. **Anthropic Agent SDK quote** — slide: "What is Claude Code, really?" (Act III)
-2. **Mastra Harness quote** — slide: "And the pattern just got a name" (Act III)
+2. **Mastra Harness quote** — slide: `mastra-quote` "The stack: Mastra" (Ernest section)
 3. **latent.space quote** — slide: "Harness Engineering" (Intro)
+4. **Anthropic Managed Agents "harness" quote** — slide: `just-use-agent-sdk` "But… Anthropic ships this now?" (Vision section)
+5. **Jared Kaplan quote on self-improving AI** — slide: `vision-arc` "Where this is going" stage 3 (Vision section)
 
 ---
 

@@ -18,6 +18,7 @@ This directory contains the source material for the meetup talk *"2026: The Year
 | [`09-harness-pattern-anatomy.md`](./09-harness-pattern-anatomy.md) | The six pillars + reliability layer + production concerns |
 | [`10-faq.md`](./10-faq.md) | Anticipated audience questions with answers |
 | [`11-references.md`](./11-references.md) | All source URLs, quotes, citations |
+| [`12-vision-arc-references.md`](./12-vision-arc-references.md) | Closing-section references: Anthropic Managed Agents, Thesys C1, OpenClaw, Kaplan self-improving quote, Symphony clarification |
 
 ## Conventions
 
@@ -37,3 +38,6 @@ This knowledge base is designed to be loaded as MCP resources or skill markdown 
 - "Who built this?" → 02-speaker-bio.md
 - "What's the difference between context engineering and harness engineering?" → 05
 - "How does the prerequisite agent stream output?" → 07
+- "Can't I just use Claude Agent SDK / Managed Agents?" → 12-vision-arc-references.md
+- "What's OpenClaw / Thesys / Symphony?" → 12-vision-arc-references.md
+- "Where is this all going?" → 12-vision-arc-references.md, 05

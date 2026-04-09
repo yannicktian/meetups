@@ -233,3 +233,5 @@ Claude managed agents
 3 Agent is fully autonomous
 Latent space article, future is autonomous agent, self improving // Symphony project
 add a quote, opens discussion
+
+your harness: remove trip planning customer support sales, keep only coding, recruiting (mentionning only Ernest and not In-App Agent) and What's yours

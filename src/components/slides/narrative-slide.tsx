@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Quote as QuoteIcon } from "lucide-react";
 import { startTransition, useEffect, useState } from "react";
 import { MiniCodeBlock } from "@/components/interactive/mini-code-block";
 import { getIcon } from "@/lib/icon-map";
@@ -28,6 +29,15 @@ type Props = {
    * space (roughly 60/40) at md+ breakpoints so longer lines fit without
    * horizontal scrolling. Use for code-centric slides. */
   codeWide?: boolean;
+  /** Render a styled pull-quote card in the visual side of the slide.
+   * Use instead of `code` when the "visual" is an attributed quote rather
+   * than source code — gets a proper blockquote card with accent stripe
+   * and Quote icon instead of Shiki's code-block rendering. */
+  quote?: {
+    text: string;
+    author?: string;
+    source?: string;
+  };
   size?: Size;
   tags?: string[];
   tagsVariant?: TagsVariant;
@@ -49,6 +59,7 @@ export function NarrativeSlide({
   codeLang,
   codeCaption,
   codeWide,
+  quote,
   size = "default",
   tags,
   tagsVariant = "muted",
@@ -99,7 +110,7 @@ export function NarrativeSlide({
   const visibleBullets =
     stagedReveal && bullets ? bullets.slice(0, visibleCount) : bullets;
 
-  const hasVisual = !!children || !!code;
+  const hasVisual = !!children || !!code || !!quote;
   const isLarge = size === "large";
 
   const titleClass = isLarge
@@ -261,6 +272,35 @@ export function NarrativeSlide({
           {children}
           {code && !children && (
             <MiniCodeBlock code={code} lang={codeLang} caption={codeCaption} />
+          )}
+          {quote && !children && !code && (
+            <div className="flex flex-col gap-3 w-full">
+              {quote.source && (
+                <span className="text-xs md:text-sm font-mono text-[var(--text-muted)] uppercase tracking-wider">
+                  {quote.source}
+                </span>
+              )}
+              <div className="relative rounded-2xl border-2 border-[var(--accent)] bg-gradient-to-br from-[var(--accent-soft)] to-white shadow-md overflow-hidden">
+                {/* Accent stripe on the left edge */}
+                <div className="absolute top-0 left-0 h-full w-1.5 bg-[var(--accent)]" />
+                {/* Faint quote mark in the corner */}
+                <QuoteIcon
+                  className="absolute top-5 right-5 w-10 h-10 md:w-12 md:h-12 text-[var(--accent)] opacity-15"
+                  strokeWidth={2}
+                  aria-hidden
+                />
+                <blockquote className="relative p-6 md:p-8 pl-7 md:pl-10">
+                  <p className="text-lg md:text-xl lg:text-2xl font-semibold leading-snug text-[var(--text-primary)] pr-10 md:pr-14">
+                    &ldquo;{quote.text}&rdquo;
+                  </p>
+                  {quote.author && (
+                    <footer className="mt-4 md:mt-5 text-sm md:text-base font-medium text-[var(--accent)]">
+                      — {quote.author}
+                    </footer>
+                  )}
+                </blockquote>
+              </div>
+            </div>
           )}
         </motion.div>
       )}

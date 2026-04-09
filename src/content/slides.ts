@@ -1150,6 +1150,81 @@ await harness.sendMessage({
     },
   },
   {
+    id: "just-use-agent-sdk",
+    title: "Building harnesses just got easier",
+    section: "vision",
+    component: "NarrativeSlide",
+    props: {
+      subtitle:
+        "The ecosystem is shipping the plumbing — a strong signal the pattern is real",
+      bullets: [
+        {
+          text: "Claude Agent SDK — open-source agent loop + tool use",
+          icon: "Code2",
+        },
+        {
+          text: "Managed Agents (April 1, 8 days ago) — hosted runtime, sessions, memory, sandbox",
+          icon: "Cpu",
+        },
+        {
+          text: "SKILL.md + Thesys C1 — plug-in know-how + rich UI for tool calls",
+          icon: "Sparkles",
+        },
+      ],
+      quote: {
+        text: "The harness — event stream, sandbox orchestration, prompt caching, context compaction, and extended thinking — is handled for you.",
+        author: "Anthropic docs",
+        source: "docs.claude.com · managed-agents-2026-04-01",
+      },
+    },
+  },
+  {
+    id: "runtime-vs-domain",
+    title: "",
+    section: "vision",
+    component: "CalloutSlide",
+    props: {
+      title: "The plumbing is solved",
+      callout: "Skills, state, tools, phases — still your craft.",
+      attribution: "That's harness engineering",
+      icon: "Brain",
+      kind: "insight",
+    },
+  },
+  {
+    id: "vision-arc",
+    title: "Where this is going",
+    section: "vision",
+    component: "GridSlide",
+    props: {
+      subtitle: "From intent → suggestion → autonomy",
+      columns: 3,
+      items: [
+        {
+          icon: "MessageSquare",
+          title: "Today — intent-first",
+          description:
+            "You describe what you want. The harness figures out how and renders rich UI.",
+          color: "#6366f1",
+        },
+        {
+          icon: "Eye",
+          title: "Next — the agent never sleeps",
+          description:
+            "24/7 monitor. Suggests actions. You approve. — OpenClaw (P. Steinberger · 247k★)",
+          color: "#8b5cf6",
+        },
+        {
+          icon: "Sparkles",
+          title: "After — self-improving",
+          description:
+            "Agents that train the next generation of agents. — Jared Kaplan (Anthropic)",
+          color: "#f43f5e",
+        },
+      ],
+    },
+  },
+  {
     id: "your-harness",
     title: "Your harness, today",
     section: "vision",
@@ -1167,26 +1242,8 @@ await harness.sendMessage({
         {
           icon: "UserPlus",
           title: "Recruiting",
-          description: "Ernest (Gojob hackathon), our In-App Agent",
+          description: "Ernest (Gojob hackathon)",
           color: "#ec4899",
-        },
-        {
-          icon: "MapPin",
-          title: "Trip planning",
-          description: "Trip designer harness",
-          color: "#10b981",
-        },
-        {
-          icon: "Headphones",
-          title: "Customer support",
-          description: "Support harness with full ticket context",
-          color: "#f59e0b",
-        },
-        {
-          icon: "TrendingUp",
-          title: "Sales",
-          description: "Sales harness — from lead to close",
-          color: "#8b5cf6",
         },
         {
           icon: "HelpCircle",
