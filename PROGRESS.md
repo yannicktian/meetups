@@ -1,6 +1,6 @@
 # Progress & Handoff
 
-Working notes for the meetup talk *"2026: The Year of Harnesses"*.
+Working notes for the meetup talk _"2026: The Year of Harnesses"_ — ~25 min content + ~5 min Q&A, Marseille, April 9, 2026.
 
 ## Where things stand
 
@@ -20,6 +20,7 @@ Working notes for the meetup talk *"2026: The Year of Harnesses"*.
 **"2026 is the year of harnesses"** — Claude Code is the canonical example, Mastra named the primitive, every domain that has a product can have a harness.
 
 Narrative arc:
+
 1. **Intro** — Hook (who uses Claude Code?), harness engineering trend (3 paradigms)
 2. **Alpha** — Gojob context, SMS demo, 3M conversations, 80/20 lesson
 3. **SaaS** — The pivot, onboarding pain
@@ -30,24 +31,27 @@ Narrative arc:
 ## What's shipped
 
 ### Slide app features
+
 - Horizontal scrolling (scroll-snap-type: x mandatory)
 - Arrow Left/Right + Up/Down + Space/Shift+Space + PageUp/PageDown + Home/End
 - Top nav bar with 6 section pills + Framer Motion shared layout highlight
 - Instant nav jumps (smooth for arrow keys)
 - Light theme (warm white, indigo/pink accents, section-tinted radial gradients)
-- 11 slide component types:
+- 14 slide component types:
   - HeroSlide (with event/hosts/acknowledgment block)
   - AboutMeSlide (avatar + bio + links)
-  - NarrativeSlide (bullets with icons, optional code panel, `size: "large"`, `highlight` on bullets)
+  - NarrativeSlide (bullets with icons, optional code panel, `size: "large"`, `highlight` on bullets, `stagedReveal` for one-at-a-time reveals)
   - QuoteSlide (big pull mark + attribution)
   - TransitionSlide
-  - StatsSlide (animated counters)
-  - CodeSlide (Shiki github-light, step-through)
+  - StatsSlide (animated counters, optional `from → to` comparison)
+  - CodeSlide (Shiki github-light, step-through via arrow keys)
   - ArchitectureSlide (animated SVG nodes/edges/groups)
-  - InteractiveSlide (wrapper for SmsConversation / PrerequisiteSetup)
+  - InteractiveSlide (wrapper for SmsConversation / PrerequisiteSetup / ArchitectureDiagram)
   - GridSlide (responsive 2/3 col with icon cards)
   - CalloutSlide (insight/warning/success/info variants)
   - ComparisonSlide (left vs right, arrow separator)
+  - HarnessCloudSlide (scattered chip cloud, burst animation)
+  - HarnessBucketsSlide (gathered chip bucket grid — pay-off to the cloud slide)
 - Interactive mockups:
   - SmsConversation (phone frame, typing indicators, auto-play + replay)
   - PrerequisiteSetup (job posting card + streaming prerequisite cards with drag-to-reorder)
@@ -58,7 +62,9 @@ Narrative arc:
 - Mobile-responsive (all components stack / scale down appropriately)
 
 ### Knowledge base
+
 13 files at `knowledge-base/` documenting the full research behind the talk. Structured for a future Q&A agent:
+
 - README index
 - Talk thesis, event context, speaker bio
 - Claude Code architecture, Mastra Harness primitive, Harness engineering trend
@@ -70,10 +76,12 @@ Narrative arc:
 Each file has YAML frontmatter (`title`, `topic`, `audience_level`, optional `sources`) for agent retrieval.
 
 ### Design spec + implementation plan
+
 - `docs/superpowers/specs/2026-04-07-meetup-slides-design.md`
 - `docs/superpowers/plans/2026-04-07-meetup-slides.md`
 
 ### Vercel deployment
+
 - Project: `yannick-tian-gojobs-projects/meetups-talk`
 - Auto-deploys on push to `main`
 - Production URL: https://meetups-talk.vercel.app
@@ -102,6 +110,7 @@ Each file has YAML frontmatter (`title`, `topic`, `audience_level`, optional `so
 ## What's next (candidates — pick what matters)
 
 ### Before the talk (Thursday April 9)
+
 - [ ] **Rehearse with timing** — walk through all slides, measure sections, cut if over ~25 min
 - [ ] **Check projector resolution** at the venue — verify font sizes look right
 - [ ] **Test keyboard remote / clicker** if using one (confirm Arrow keys work, which they should)
@@ -110,6 +119,7 @@ Each file has YAML frontmatter (`title`, `topic`, `audience_level`, optional `so
 - [ ] **Translate mentally** — slides are English, delivery is French; practice the transitions
 
 ### Content iteration (if time permits)
+
 - [ ] Review specific slides that feel weak — tighten copy
 - [ ] Add more real details to Alpha supervision slide (currently just the 80/20 callout)
 - [ ] Consider a "behind the scenes" slide with real production metrics from Langfuse
@@ -117,6 +127,7 @@ Each file has YAML frontmatter (`title`, `topic`, `audience_level`, optional `so
 - [ ] Maybe shorten the Pattern section — it has 12 slides, could cut 2-3
 
 ### Post-talk / V2 ideas
+
 - [ ] **V2: Agent-driven presentation** — original stretch goal. Build a Mastra agent that serves slide descriptors on demand, using the knowledge base as MCP resources. The speaker asks questions, the agent renders the answer as rich UI using the existing slide components. Meta-level: the talk's medium becomes the message.
 - [ ] **Q&A agent** — simpler than V2. Just a chat widget on the site that retrieves from `knowledge-base/` to answer audience questions about the talk. Good first use of the knowledge base we already built.
 - [ ] **Record the talk** — if the meetup allows recording, publish as a resource
@@ -205,3 +216,15 @@ meetups/
 - `feedback_no_visual_companion.md` — user prefers text-only brainstorming (mobile remote control)
 
 These load automatically in future sessions via MEMORY.md index.
+
+Page 20
+It still feels as if we are adding agentic features to an old fashioned product
+We implement AI features on top of a standard product
+It is not an AI native product
+Agent has almost no autonomy, no reasoning, no skill. Only prompt engineering and context engineering
+What if we create the claude code for recruiters?
+
+Vision
+1 User intent
+2 Harness + OpenClaw => Agent suggests, asks the user
+3 Agent is fully autonomous
